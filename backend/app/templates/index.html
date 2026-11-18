@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRUTHLENS AI — The Truth Archive | Editorial Intelligence Suite</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300F0FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/><path d='m9 12 2 2 4-4'/></svg>" />
+
+  <!-- Premium Typography: Syne, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js for Advanced Data Telemetry -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            void: '#03050C',
+            obsidian: '#070B16',
+            surface: '#0B1120',
+            card: '#0F172A',
+            cardHover: '#131E35',
+            cyanNeon: '#00F0FF',
+            violetNeon: '#8B5CF6',
+            emeraldNeon: '#00FF9D',
+            amberNeon: '#FFB800',
+            roseNeon: '#FF2E54',
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Global Cinematic Base */
+    :root {
+      --cyan: #00F0FF;
+      --violet: #8B5CF6;
+      --emerald: #00FF9D;
+      --void: #03050C;
+    }
+
+    body {
+      background-color: #03050C;
+      color: #F1F5F9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      selection-background-color: rgba(0, 240, 255, 0.25);
+      selection-color: #00F0FF;
+    }
+
+    ::selection {
+      background: rgba(0, 240, 255, 0.25);
+      color: #00F0FF;
+    }
+
+    /* Subtle Cybernetic Grid Pattern */
+    .cyber-grid {
+      background-size: 48px 48px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    }
+
+    /* Scanline Raster Overlay */
+    .scanlines {
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0, 0, 0, 0.35) 50%,
+        rgba(0, 0, 0, 0.35)
+      );
+      background-size: 100% 4px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #03050C; }
+    ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00F0FF; }
+
+    /* Bento Card with Dynamic Cursor Spotlight */
+    .bento-card {
+      position: relative;
+      background: rgba(11, 17, 32, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+        rgba(0, 240, 255, 0.08),
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bento-card:hover {
+      border-color: rgba(0, 240, 255, 0.28);
+      box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.12);
+    }
+
+    .bento-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Glowing Text & Neon Accents */
+    .neon-text-cyan {
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 40px rgba(0, 240, 255, 0.2);
+    }
+    .neon-text-violet {
+      text-shadow: 0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.2);
+    }
+    .neon-border-cyan {
+      box-shadow: 0 0 20px -3px rgba(0, 240, 255, 0.3);
+    }
+
+    /* Marquee Animation for Live Wire Feed */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marquee 32s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Radar Scanning Sweep */
+    @keyframes sweep {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-sweep {
+      animation: sweep 8s linear infinite;
+    }
+
+    /* Ambient Glow Pulsing */
+    @keyframes ambientGlow {
+      0%, 100% { opacity: 0.18; transform: scale(1); }
+      50% { opacity: 0.32; transform: scale(1.08); }
+    }
+    .animate-ambient-glow {
+      animation: ambientGlow 7s ease-in-out infinite;
+    }
+
+    /* Cyber Chamfer Corners */
+    .chamfer-btn {
+      clip-path: polygon(
+        0 8px, 8px 0,
+        calc(100% - 8px) 0, 100% 8px,
+        100% calc(100% - 8px), calc(100% - 8px) 100%,
+        8px 100%, 0 calc(100% - 8px)
+      );
+    }
+
+    /* Print Formatting */
+    @media print {
+      body { background: #FFFFFF !important; color: #000000 !important; }
+      header, footer, #live-wire-ticker, #nav-dock, .no-print { display: none !important; }
+      .tab-page { display: block !important; }
+      #page-landing, #page-dashboard, #page-studio, #page-history, #page-models, #page-about { display: none !important; }
+      #page-report { display: block !important; padding: 0 !important; }
+      .bento-card { border: 1px solid #CCCCCC !important; background: #FFFFFF !important; color: #000000 !important; box-shadow: none !important; }
+      .text-white { color: #000000 !important; }
+      .text-slate-300, .text-slate-400 { color: #444444 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-cyanNeon/20 selection:text-cyanNeon">
+
+  <!-- Canvas Interactive Particle Constellation -->
+  <canvas id="particle-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Cyber Grid Background Layer -->
+  <div class="fixed inset-0 cyber-grid pointer-events-none z-0 opacity-70"></div>
+
+  <!-- Scanlines Texture Layer -->
+  <div class="fixed inset-0 scanlines pointer-events-none z-0 opacity-40"></div>
+
+  <!-- Chromatic Radial Orbs -->
+  <div class="fixed top-[-10%] left-[20%] w-[650px] h-[650px] bg-gradient-to-tr from-cyanNeon/15 via-violetNeon/10 to-transparent rounded-full blur-[140px] pointer-events-none z-0 animate-ambient-glow"></div>
+  <div class="fixed bottom-[-15%] right-[15%] w-[700px] h-[700px] bg-gradient-to-br from-violetNeon/15 via-cyanNeon/10 to-transparent rounded-full blur-[150px] pointer-events-none z-0 animate-ambient-glow" style="animation-delay: -3.5s;"></div>
+
+  <!-- ================= TOP HUD TELEMETRY & DISPATCH TICKER ================= -->
+  <div id="live-wire-ticker" class="relative z-50 bg-[#020409]/95 border-b border-white/5 py-1.5 px-4 text-[11px] font-mono overflow-hidden no-print">
+    <div class="max-w-7xl mx-auto flex items-center gap-3">
+      <div class="flex items-center gap-2 flex-shrink-0 text-cyanNeon pr-3 border-r border-white/10 font-bold tracking-widest uppercase">
+        <span class="w-2 h-2 rounded-full bg-cyanNeon animate-ping"></span>
+        <span>LIVE GLOBAL WIRE</span>
+      </div>
+        <div class="overflow-hidden flex-1 relative">
+        <div id="live-wire-track" class="animate-marquee whitespace-nowrap text-slate-300 flex items-center gap-10">
+          <span class="flex items-center gap-2">
+            <span class="text-emeraldNeon">[VERIFIED // TIER-1]</span>
+            <span>REUTERS: James Webb Telescope Confirms Ionized Gas Accretion in CEERS 1019 Galaxy</span>
+          </span>
+          <span class="text-slate-600">•</span>
+          <span class="flex items-center gap-2">
+            <span class="text-roseNeon">[DECEPTIVE // FLAGGED]</span>
+            <span>VIRAL DISPATCH: 5G Towers Transmitting DNA-Altering Frequencies [Linguistic Risk: 92/100]</span>
+          </span>
+          <span class="text-slate-600">•</span>
+          <span class="flex items-center gap-2">
+            <span class="text-emeraldNeon">[VERIFIED // ISRO]</span>
+            <span>ISRO: Pragyan Rover LIBS Confirms Surface Sulfur at Moon's South Pole [Nature Astronomy]</span>
+          </span>
+          <span class="text-slate-600">•</span>
+          <span class="flex items-center gap-2">
+            <span class="text-amberNeon">[DIVERGENT // UNDER REVIEW]</span>
+            <span>PREPRINT ARCHIVE: Novel Room-Temperature Superconductor Claims [Model Consensus: 40%]</span>
+          </span>
+          <span class="text-slate-600">•</span>
+          <span class="flex items-center gap-2">
+            <span class="text-cyanNeon">[PRIMARY INDEX]</span>
+            <span>ZERO-HALLUCINATION PROTOCOL ACTIVE // 5 CLASSICAL & SEQUENCE ML MODELS IN ENSEMBLE</span>
+          </span>
+        </div>
+      </div>
+      <div class="hidden lg:flex items-center gap-3 text-slate-400 flex-shrink-0 pl-3 border-l border-white/10 text-[10px]">
+        <span id="hud-clock">00:00:00 UTC</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-cyanNeon">STATION_ID: TL-NODE-ALPHA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MASTER HEADER & NAVIGATION DOCK ================= -->
+  <header class="sticky top-0 z-40 bg-[#070B16]/85 backdrop-blur-xl border-b border-white/10 px-4 lg:px-8 py-3 transition-all duration-300 no-print">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand Lockup -->
+      <a href="/" onclick="switchTab('landing'); return false;" class="flex items-center gap-3.5 group cursor-pointer">
+        <div class="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-cyanNeon/30 via-violetNeon/40 to-cyanNeon flex items-center justify-center p-[1px] shadow-lg shadow-cyanNeon/20 group-hover:scale-105 transition-all duration-300">
+          <div class="w-full h-full rounded-xl bg-[#070B16] flex items-center justify-center">
+            <i data-lucide="shield-alert" class="w-6 h-6 text-cyanNeon group-hover:rotate-12 transition-transform duration-300"></i>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-display font-black text-xl tracking-tight text-white group-hover:text-cyanNeon transition-colors">TRUTHLENS</span>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold tracking-widest bg-cyanNeon/15 text-cyanNeon border border-cyanNeon/30">AI</span>
+          </div>
+          <p class="text-[10px] font-mono tracking-wider text-slate-400 uppercase">THE TRUTH ARCHIVE // V2.6</p>
+        </div>
+      </a>
+
+      <!-- Navigation Dock -->
+      <nav id="nav-dock" class="hidden xl:flex items-center gap-1 bg-[#0B1120]/90 p-1.5 rounded-2xl border border-white/10 font-mono text-xs shadow-2xl">
+        <button onclick="switchTab('landing')" id="nav-landing" class="nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-cyanNeon bg-cyanNeon/10 border border-cyanNeon/20 font-semibold transition-all">
+          <i data-lucide="compass" class="w-4 h-4"></i>
+          <span>// 01 ARCHIVE</span>
+        </button>
+        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="activity" class="w-4 h-4"></i>
+          <span>// 02 TELEMETRY</span>
+        </button>
+        <button onclick="switchTab('studio')" id="nav-studio" class="nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>// 03 STUDIO</span>
+        </button>
+        <button onclick="switchTab('history')" id="nav-history" class="nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="database" class="w-4 h-4"></i>
+          <span>// 04 DOSSIERS</span>
+        </button>
+        <button onclick="switchTab('models')" id="nav-models" class="nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+          <span>// 05 BENCHMARKS</span>
+        </button>
+        <button onclick="switchTab('about')" id="nav-about" class="nav-btn flex items-center gap-2 px-3.5 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="file-code" class="w-4 h-4"></i>
+          <span>// 06 WHITEPAPER</span>
+        </button>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="auth-open-btn" onclick="openAuthModal()" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0B1120] border border-white/10 text-slate-300 hover:text-cyanNeon hover:border-cyanNeon/40 text-xs font-mono transition-all">
+          <i data-lucide="user-round" class="w-3.5 h-3.5 text-cyanNeon"></i>
+          <span id="auth-label">SIGN IN</span>
+        </button>
+
+        <button id="nav-menu-btn" onclick="toggleMobileNav()" class="xl:hidden flex items-center justify-center w-9 h-9 rounded-xl bg-[#0B1120] border border-white/10 text-slate-300 hover:text-cyanNeon" aria-label="Open navigation">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Audio HUD Toggle -->
+        <button onclick="toggleAudio()" id="audio-toggle-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0B1120] border border-white/10 text-slate-400 hover:text-cyanNeon hover:border-cyanNeon/40 text-xs font-mono transition-all">
+          <i data-lucide="volume-2" id="audio-icon" class="w-3.5 h-3.5 text-cyanNeon"></i>
+          <span id="audio-label">AUDIO: ACTIVE</span>
+        </button>
+
+        <!-- Analyze CTA -->
+        <button onclick="switchTab('studio')" class="relative group overflow-hidden px-4 py-2 rounded-xl bg-gradient-to-r from-cyanNeon to-violetNeon text-black font-bold text-xs tracking-wider uppercase font-mono shadow-lg shadow-cyanNeon/25 hover:shadow-cyanNeon/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+          <i data-lucide="terminal" class="w-4 h-4"></i>
+          <span>DECODE ARTICLE</span>
+        </button>
+      </div>
+
+    </div>
+
+    <div id="mobile-nav" class="hidden xl:hidden mt-3 border-t border-white/10 pt-3">
+      <div class="grid grid-cols-2 gap-2 font-mono text-xs">
+        <button onclick="switchTab('landing'); toggleMobileNav(false)" class="px-3 py-2 rounded-xl bg-[#0B1120] border border-white/10 text-left text-slate-200">// 01 ARCHIVE</button>
+        <button onclick="switchTab('dashboard'); toggleMobileNav(false)" class="px-3 py-2 rounded-xl bg-[#0B1120] border border-white/10 text-left text-slate-200">// 02 TELEMETRY</button>
+        <button onclick="switchTab('studio'); toggleMobileNav(false)" class="px-3 py-2 rounded-xl bg-[#0B1120] border border-white/10 text-left text-slate-200">// 03 STUDIO</button>
+        <button onclick="switchTab('history'); toggleMobileNav(false)" class="px-3 py-2 rounded-xl bg-[#0B1120] border border-white/10 text-left text-slate-200">// 04 DOSSIERS</button>
+        <button onclick="switchTab('models'); toggleMobileNav(false)" class="px-3 py-2 rounded-xl bg-[#0B1120] border border-white/10 text-left text-slate-200">// 05 BENCHMARKS</button>
+        <button onclick="switchTab('about'); toggleMobileNav(false)" class="px-3 py-2 rounded-xl bg-[#0B1120] border border-white/10 text-left text-slate-200">// 06 WHITEPAPER</button>
+        <button onclick="openAuthModal(); toggleMobileNav(false)" class="px-3 py-2 rounded-xl bg-[#0B1120] border border-cyanNeon/30 text-left text-cyanNeon sm:hidden">SIGN IN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 pt-6 pb-20 relative z-10">
+
+    <!-- ========================================================================= -->
+    <!-- PAGE 1: THE TRUTH ARCHIVE (CINEMATIC HERO & NARRATIVE DISCOVERY)          -->
+    <!-- ========================================================================= -->
+    <section id="page-landing" class="tab-page space-y-24">
+
+      <!-- Hero Section -->
+      <div class="relative pt-10 pb-16 text-center max-w-5xl mx-auto px-4">
+        
+        <!-- Status Indicator Pill -->
+        <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#0B1120]/90 border border-cyanNeon/30 text-cyanNeon text-xs font-mono mb-8 shadow-xl shadow-cyanNeon/10 animate-fade">
+          <span class="w-2 h-2 rounded-full bg-cyanNeon animate-ping"></span>
+          <span>AN EXPLAINABLE AI INTELLIGENCE PLATFORM</span>
+          <span class="text-slate-600">|</span>
+          <span class="text-slate-400">DEV_COORD: 28.545°N 77.273°E</span>
+        </div>
+
+        <!-- Master Typographic Headline -->
+        <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white leading-[1.08] mb-8">
+          DECLASSIFY THE HEADLINES.<br/>
+          <span class="bg-gradient-to-r from-cyanNeon via-white to-violetNeon bg-clip-text text-transparent neon-text-cyan">
+            DISCOVER GROUND TRUTH.
+          </span>
+        </h1>
+
+        <p class="text-base sm:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+          TruthLens AI bridges deep natural language processing research, stylometric forensic analysis, and zero-hallucination evidence retrieval. We do not issue dogmatic verdicts — we produce transparent, multi-model probabilistic credibility intelligence.
+        </p>
+
+        <!-- Primary Action Cluster -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <button onclick="switchTab('studio')" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-cyanNeon via-cyan-400 to-violetNeon text-black font-extrabold text-sm tracking-wider uppercase font-mono shadow-2xl shadow-cyanNeon/30 hover:shadow-cyanNeon/50 hover:scale-[1.02] active:scale-[0.98] transition-all">
+            <i data-lucide="zap" class="w-5 h-5"></i>
+            <span>INITIALIZE ANALYSIS STUDIO</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+          </button>
+
+          <button onclick="switchTab('dashboard')" class="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-[#0B1120] hover:bg-[#10192E] border border-white/10 hover:border-cyanNeon/40 text-slate-200 font-mono font-semibold text-sm transition-all">
+            <i data-lucide="bar-chart-3" class="w-5 h-5 text-cyanNeon"></i>
+            <span>VIEW LIVE TELEMETRY</span>
+          </button>
+        </div>
+
+        <!-- BENCHMARK PRESETS (One-Click Investigation Launcher) -->
+        <div class="text-left space-y-3 max-w-4xl mx-auto">
+          <div class="flex items-center justify-between px-2 text-xs font-mono text-slate-400">
+            <span class="flex items-center gap-2">
+              <i data-lucide="sliders" class="w-3.5 h-3.5 text-cyanNeon"></i>
+              <span>ONE-CLICK BENCHMARK DISPATCHES (INSTANT EVALUATION)</span>
+            </span>
+            <span class="text-cyanNeon">SELECT TO INJECT & VERIFY</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            
+            <!-- Preset 1: Science -->
+            <div onclick="launchPresetAndAnalyze('jwst')" class="bento-card p-4 cursor-pointer hover:border-emeraldNeon/50 group">
+              <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                <span class="px-2 py-0.5 rounded bg-emeraldNeon/10 text-emeraldNeon border border-emeraldNeon/30 font-bold">LIKELY GENUINE</span>
+                <span class="text-slate-400 font-bold">SCORE: 92.4</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-cyanNeon transition-colors line-clamp-2">
+                NASA James Webb Telescope Discovers Oldest Confirmed Black Hole in Early Universe
+              </h4>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">
+                Published in The Astrophysical Journal with NIRSpec spectroscopic records.
+              </p>
+              <div class="flex items-center justify-between text-[10px] font-mono text-cyanNeon pt-3 mt-2 border-t border-white/5">
+                <span>ENGLISH (EN)</span>
+                <span class="group-hover:translate-x-1 transition-transform">INJECT & RUN →</span>
+              </div>
+            </div>
+
+            <!-- Preset 2: Conspiracy Disinformation -->
+            <div onclick="launchPresetAndAnalyze('5g')" class="bento-card p-4 cursor-pointer hover:border-roseNeon/50 group">
+              <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                <span class="px-2 py-0.5 rounded bg-roseNeon/10 text-roseNeon border border-roseNeon/30 font-bold">POTENTIALLY MISLEADING</span>
+                <span class="text-slate-400 font-bold">SCORE: 18.2</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-roseNeon transition-colors line-clamp-2">
+                5G Towers Transmitting Mind-Control Frequencies to Alter Human Genetic Code
+              </h4>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">
+                Emotional hysteria, high linguistic panic, and pseudo-medical remedies.
+              </p>
+              <div class="flex items-center justify-between text-[10px] font-mono text-roseNeon pt-3 mt-2 border-t border-white/5">
+                <span>ENGLISH (EN)</span>
+                <span class="group-hover:translate-x-1 transition-transform">INJECT & RUN →</span>
+              </div>
+            </div>
+
+            <!-- Preset 3: Multilingual Hindi -->
+            <div onclick="launchPresetAndAnalyze('hindi_real')" class="bento-card p-4 cursor-pointer hover:border-cyanNeon/50 group">
+              <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                <span class="px-2 py-0.5 rounded bg-cyanNeon/10 text-cyanNeon border border-cyanNeon/30 font-bold">HINDI BENCHMARK</span>
+                <span class="text-slate-400 font-bold">SCORE: 89.6</span>
+              </div>
+              <h4 class="text-xs font-bold text-white group-hover:text-cyanNeon transition-colors line-clamp-2">
+                इसरो ने चंद्रयान-3 के डेटा से चंद्रमा के दक्षिणी ध्रुव पर सल्फर की पुष्टि की
+              </h4>
+              <p class="text-[11px] text-slate-400 mt-1 line-clamp-2">
+                Devanagari NFKC normalization with negation token protection.
+              </p>
+              <div class="flex items-center justify-between text-[10px] font-mono text-cyanNeon pt-3 mt-2 border-t border-white/5">
+                <span>HINDI (HI)</span>
+                <span class="group-hover:translate-x-1 transition-transform">INJECT & RUN →</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- THE FOUR PILLARS BENTO GRID (Narrative Architecture) -->
+      <div class="space-y-8 max-w-6xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <span class="text-xs font-mono font-bold text-cyanNeon tracking-widest uppercase">[SYSTEM ARCHITECTURE]</span>
+          <h2 class="font-display font-black text-2xl sm:text-4xl text-white">THE FOUR PILLARS OF EDITORIAL INTELLIGENCE</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Eliminating black-box heuristics through multi-model consensus and zero-hallucination evidence.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div class="bento-card p-6 space-y-4 relative">
+            <span class="font-mono font-black text-4xl text-white/5 absolute top-4 right-4">01</span>
+            <div class="w-10 h-10 rounded-xl bg-cyanNeon/10 border border-cyanNeon/30 flex items-center justify-center text-cyanNeon">
+              <i data-lucide="file-input" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-display font-bold text-base text-white">Multi-Modal Ingestion</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Ingest raw text, URLs guarded with SSRF security boundaries, documents (TXT, PDF, DOCX), and inspect image EXIF provenance.
+            </p>
+            <div class="pt-2 text-[10px] font-mono text-cyanNeon flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyanNeon"></span>
+              <span>SSRF IP SHIELD ACTIVE</span>
+            </div>
+          </div>
+
+          <div class="bento-card p-6 space-y-4 relative">
+            <span class="font-mono font-black text-4xl text-white/5 absolute top-4 right-4">02</span>
+            <div class="w-10 h-10 rounded-xl bg-violetNeon/10 border border-violetNeon/30 flex items-center justify-center text-violetNeon">
+              <i data-lucide="scan" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-display font-bold text-base text-white">Linguistic & Stylometric Radar</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Diagnostic heuristics analyzing sensationalism dictionaries, emotional panic triggers, punctuation intensity, and sentence burstiness.
+            </p>
+            <div class="pt-2 text-[10px] font-mono text-violetNeon flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-violetNeon"></span>
+              <span>NEGATION PRESERVED (EN/HI)</span>
+            </div>
+          </div>
+
+          <div class="bento-card p-6 space-y-4 relative">
+            <span class="font-mono font-black text-4xl text-white/5 absolute top-4 right-4">03</span>
+            <div class="w-10 h-10 rounded-xl bg-emeraldNeon/10 border border-emeraldNeon/30 flex items-center justify-center text-emeraldNeon">
+              <i data-lucide="cpu" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-display font-bold text-base text-white">5-Model Consensus</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Simultaneous evaluation across Logistic Regression, Naive Bayes, Linear SVM, Random Forest, and Bidirectional LSTM.
+            </p>
+            <div class="pt-2 text-[10px] font-mono text-emeraldNeon flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emeraldNeon"></span>
+              <span>PLATT-SCALED PROBABILITIES</span>
+            </div>
+          </div>
+
+          <div class="bento-card p-6 space-y-4 relative">
+            <span class="font-mono font-black text-4xl text-white/5 absolute top-4 right-4">04</span>
+            <div class="w-10 h-10 rounded-xl bg-cyanNeon/10 border border-cyanNeon/30 flex items-center justify-center text-cyanNeon">
+              <i data-lucide="check-check" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-display font-bold text-base text-white">Zero-Hallucination Evidence</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Extracts factual assertions and queries authenticated primary repositories (NASA, WHO, Reuters, PIB, Nature). Never synthesizes URLs.
+            </p>
+            <div class="pt-2 text-[10px] font-mono text-cyanNeon flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyanNeon"></span>
+              <span>CERTIFIED CITATIONS ONLY</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FAQ & ETHICAL MANDATE ACCORDION -->
+      <div class="max-w-4xl mx-auto space-y-4 pt-6">
+        <div class="text-center space-y-1 mb-8">
+          <span class="text-xs font-mono font-bold text-violetNeon uppercase tracking-widest">[ETHICAL BOUNDARIES]</span>
+          <h3 class="font-display font-bold text-2xl text-white">FREQUENTLY EXAMINED QUESTIONS</h3>
+        </div>
+
+        <div class="space-y-3">
+          <div class="bento-card p-5 cursor-pointer" onclick="toggleAccordion('faq-1')">
+            <div class="flex items-center justify-between font-bold text-sm text-white">
+              <span>Does TruthLens AI claim machine learning alone establishes whether news is true?</span>
+              <i data-lucide="chevron-down" id="faq-1-icon" class="w-4 h-4 text-cyanNeon transition-transform"></i>
+            </div>
+            <div id="faq-1" class="hidden mt-3 text-xs text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+              No. TruthLens AI strictly adheres to the principle that machine learning models cannot replace empirical truth or independent human journalism. The platform produces a model-derived probabilistic credibility index (Likely Genuine, Potentially Misleading, Needs Further Verification) based on linguistic markers, cross-model consensus, and verified factual evidence retrieval.
+            </div>
+          </div>
+
+          <div class="bento-card p-5 cursor-pointer" onclick="toggleAccordion('faq-2')">
+            <div class="flex items-center justify-between font-bold text-sm text-white">
+              <span>How does the evidence-based claim verification work?</span>
+              <i data-lucide="chevron-down" id="faq-2-icon" class="w-4 h-4 text-cyanNeon transition-transform"></i>
+            </div>
+            <div id="faq-2" class="hidden mt-3 text-xs text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+              The system parses verifiable factual assertions (quantities, dates, institutional statements) and queries an index of authenticated records from international wire services (Reuters, AP), peer-reviewed scientific journals (Nature, The Lancet), and certified fact-checkers (PIB, WHO). It strictly enforces zero-hallucination rules and never fabricates citations or URLs.
+            </div>
+          </div>
+
+          <div class="bento-card p-5 cursor-pointer" onclick="toggleAccordion('faq-3')">
+            <div class="flex items-center justify-between font-bold text-sm text-white">
+              <span>Does an AI-assisted writing style mean an article is fake news?</span>
+              <i data-lucide="chevron-down" id="faq-3-icon" class="w-4 h-4 text-cyanNeon transition-transform"></i>
+            </div>
+            <div id="faq-3" class="hidden mt-3 text-xs text-slate-300 leading-relaxed border-t border-white/5 pt-3">
+              No. Our AI-Writing-Style assessment is explicitly labeled as experimental. Many professional newsrooms and journalists utilize AI-assisted drafting and copy editing. High structural uniformity is not proof of misinformation.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PAGE 2: EXECUTIVE INTELLIGENCE DASHBOARD (TELEMETRY & VISUALIZATION)     -->
+    <!-- ========================================================================= -->
+    <section id="page-dashboard" class="tab-page hidden space-y-8">
+      
+      <!-- Dashboard Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div>
+          <span class="text-xs font-mono font-bold text-cyanNeon uppercase tracking-wider">[TELEMETRIC COMMAND]</span>
+          <span id="dashboard-sample-badge" class="hidden ml-2 align-middle text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amberNeon/10 text-amberNeon border border-amberNeon/30">Preview baseline — archive empty</span>
+          <h1 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">EXECUTIVE INTELLIGENCE DASHBOARD</h1>
+          <p class="text-xs text-slate-400 mt-1">Real-time database metrics, credibility distribution, trend volume, and recent verification audits.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="loadDashboardData()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120] hover:bg-[#10192E] border border-white/10 text-xs font-mono text-slate-200 transition-colors">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-cyanNeon"></i>
+            <span>SYNC TELEMETRY</span>
+          </button>
+          <button onclick="switchTab('studio')" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-cyanNeon text-black font-bold text-xs font-mono shadow-lg shadow-cyanNeon/25 hover:shadow-cyanNeon/40 transition-all">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span>ANALYZE DISPATCH</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI BENTO CARDS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bento-card p-6">
+          <div class="flex items-center justify-between text-slate-400 mb-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider">TOTAL INGESTED</span>
+            <i data-lucide="layers" class="w-4 h-4 text-cyanNeon"></i>
+          </div>
+          <span id="kpi-total" class="font-display font-black text-4xl text-white block mb-1">0</span>
+          <span class="text-[11px] text-slate-400 font-mono">Dossiers in SQLite Archive</span>
+        </div>
+
+        <div class="bento-card p-6 border-emeraldNeon/20">
+          <div class="flex items-center justify-between text-emeraldNeon mb-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider">LIKELY GENUINE</span>
+            <i data-lucide="check-circle" class="w-4 h-4 text-emeraldNeon"></i>
+          </div>
+          <span id="kpi-genuine" class="font-display font-black text-4xl text-emeraldNeon block mb-1">0</span>
+          <span id="kpi-genuine-pct" class="text-[11px] text-slate-400 font-mono">0% high credibility</span>
+        </div>
+
+        <div class="bento-card p-6 border-roseNeon/20">
+          <div class="flex items-center justify-between text-roseNeon mb-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider">MISLEADING / HOAX</span>
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-roseNeon"></i>
+          </div>
+          <span id="kpi-misleading" class="font-display font-black text-4xl text-roseNeon block mb-1">0</span>
+          <span id="kpi-misleading-pct" class="text-[11px] text-slate-400 font-mono">0% flagged disinformation</span>
+        </div>
+
+        <div class="bento-card p-6 border-amberNeon/20">
+          <div class="flex items-center justify-between text-amberNeon mb-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider">NEEDS VERIFICATION</span>
+            <i data-lucide="help-circle" class="w-4 h-4 text-amberNeon"></i>
+          </div>
+          <span id="kpi-verify" class="font-display font-black text-4xl text-amberNeon block mb-1">0</span>
+          <span class="text-[11px] text-slate-400 font-mono">Divergent model consensus</span>
+        </div>
+
+      </div>
+
+      <!-- CHARTS ROW -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Credibility Donut -->
+        <div class="bento-card p-6 flex flex-col justify-between">
+          <div class="mb-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display font-bold text-base text-white">Credibility Distribution</h3>
+              <span class="text-[10px] font-mono text-cyanNeon px-2 py-0.5 rounded bg-cyanNeon/10">3-TIER CALIBRATION</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Calibrated threshold distribution across database records.</p>
+          </div>
+          <div class="w-full h-56 flex items-center justify-center relative">
+            <canvas id="chart-credibility-pie"></canvas>
+          </div>
+          <div class="flex items-center justify-center gap-4 text-xs font-mono pt-4 border-t border-white/5">
+            <span class="flex items-center gap-1.5 text-emeraldNeon"><span class="w-2 h-2 rounded-full bg-emeraldNeon"></span>Genuine</span>
+            <span class="flex items-center gap-1.5 text-roseNeon"><span class="w-2 h-2 rounded-full bg-roseNeon"></span>Misleading</span>
+            <span class="flex items-center gap-1.5 text-amberNeon"><span class="w-2 h-2 rounded-full bg-amberNeon"></span>Verify</span>
+          </div>
+        </div>
+
+        <!-- 7-Day Verification Telemetry Area Chart -->
+        <div class="bento-card p-6 lg:col-span-2 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-display font-bold text-base text-white">Verification Activity Telemetry</h3>
+              <p class="text-xs text-slate-400 mt-0.5">7-day rolling volume of incoming news dispatches processed.</p>
+            </div>
+            <div class="flex items-center gap-2 font-mono text-xs text-cyanNeon">
+              <span class="w-2 h-2 rounded-full bg-cyanNeon animate-pulse"></span>
+              <span>LIVE TELEMETRY FEED</span>
+            </div>
+          </div>
+          <div class="w-full h-56">
+            <canvas id="chart-trends-area"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RECENT TELEMETRY TABLE -->
+      <div class="bento-card p-6">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+          <div>
+            <h3 class="font-display font-bold text-base text-white">Recent Analysis Telemetry</h3>
+            <p class="text-xs text-slate-400">Audit trail of the most recent intelligence evaluations.</p>
+          </div>
+          <button onclick="switchTab('history')" class="text-xs font-mono text-cyanNeon hover:underline flex items-center gap-1">
+            <span>FULL ARCHIVE</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead>
+              <tr class="border-b border-white/10 text-slate-400 uppercase">
+                <th class="pb-3 font-semibold">Dossier Headline</th>
+                <th class="pb-3 font-semibold">Tier Determination</th>
+                <th class="pb-3 font-semibold">Credibility Index</th>
+                <th class="pb-3 font-semibold text-right">Inspect</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-recent-tbody" class="divide-y divide-white/5 text-slate-300">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="dashboard-trending" class="bento-card p-6">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+          <div>
+            <h3 class="font-display font-bold text-base text-white">Narrative Clusters</h3>
+            <p id="dashboard-trending-note" class="text-xs text-slate-400">Terms recurring across archived headlines, with the dominant credibility tier.</p>
+          </div>
+        </div>
+        <div id="dashboard-trending-list" class="space-y-2 font-mono text-xs text-slate-400">Awaiting telemetry sync.</div>
+      </div>
+
+      <p id="dashboard-error" class="hidden text-xs font-mono text-roseNeon"></p>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PAGE 3: ANALYSIS STUDIO (MULTI-MODAL INGESTION & PIPELINE EXECUTION)     -->
+    <!-- ========================================================================= -->
+    <section id="page-studio" class="tab-page hidden max-w-4xl mx-auto space-y-6">
+      
+      <!-- Studio Header -->
+      <div class="text-center max-w-xl mx-auto space-y-2">
+        <span class="text-xs font-mono font-bold text-cyanNeon uppercase tracking-wider">[INTELLIGENCE WORKBENCH]</span>
+        <h1 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">NEWS ANALYSIS STUDIO</h1>
+        <p class="text-xs sm:text-sm text-slate-400">
+          Submit news articles, headlines, documents, or URLs for multi-model ensemble classification, linguistic diagnostics, and verified claim retrieval.
+        </p>
+      </div>
+
+      <!-- Mode Selector Tabs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-[#0B1120] p-1.5 rounded-2xl border border-white/10 font-mono text-xs">
+        <button onclick="setStudioMode('paste')" id="tab-btn-paste" class="studio-tab-btn flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-bold bg-cyanNeon text-black shadow-lg shadow-cyanNeon/20 transition-all">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>// 01 PASTE</span>
+        </button>
+        <button onclick="setStudioMode('url')" id="tab-btn-url" class="studio-tab-btn flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="globe" class="w-4 h-4"></i>
+          <span>// 02 URL LINK</span>
+        </button>
+        <button onclick="setStudioMode('document')" id="tab-btn-document" class="studio-tab-btn flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="upload" class="w-4 h-4"></i>
+          <span>// 03 DOCUMENT</span>
+        </button>
+        <button onclick="setStudioMode('image')" id="tab-btn-image" class="studio-tab-btn flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-all">
+          <i data-lucide="camera" class="w-4 h-4"></i>
+          <span>// 04 IMAGE EXIF</span>
+        </button>
+      </div>
+
+      <!-- Error Banner -->
+      <div id="studio-error" class="hidden p-4 rounded-xl bg-roseNeon/10 border border-roseNeon/30 text-roseNeon text-xs flex items-center gap-2.5 font-mono">
+        <i data-lucide="alert-octagon" class="w-4 h-4 flex-shrink-0"></i>
+        <span id="studio-error-msg">Validation error occurred.</span>
+      </div>
+
+      <!-- Input Workbench Card -->
+      <div class="bento-card p-6 sm:p-8 space-y-6">
+        
+        <!-- Mode: Paste Text -->
+        <div id="mode-paste-container" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-white/5 font-mono text-xs">
+            <span class="font-bold text-slate-300 uppercase tracking-wider">ARTICLE & HEADLINE INGESTION</span>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-slate-500">Inject:</span>
+              <button onclick="loadSampleArticle('jwst')" class="px-2.5 py-1 rounded bg-white/5 hover:bg-cyanNeon/15 hover:text-cyanNeon border border-white/10 text-[11px] transition-colors">
+                JWST Science
+              </button>
+              <button onclick="loadSampleArticle('5g')" class="px-2.5 py-1 rounded bg-white/5 hover:bg-roseNeon/15 hover:text-roseNeon border border-white/10 text-[11px] transition-colors">
+                5G Conspiracy
+              </button>
+              <button onclick="loadSampleArticle('hindi_real')" class="px-2.5 py-1 rounded bg-white/5 hover:bg-cyanNeon/15 hover:text-cyanNeon border border-white/10 text-[11px] transition-colors">
+                ISRO Hindi
+              </button>
+            </div>
+          </div>
+
+          <input
+            id="studio-title"
+            type="text"
+            placeholder="News Headline / Story Title (Optional but enhances accuracy)"
+            class="w-full px-4 py-3.5 rounded-xl bg-[#070B16] border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyanNeon font-sans transition-colors"
+          />
+
+          <textarea
+            id="studio-content"
+            rows="9"
+            placeholder="Paste complete news body, journalistic article, or viral claim here..."
+            oninput="updateWordCount()"
+            class="w-full p-4 rounded-xl bg-[#070B16] border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyanNeon font-sans leading-relaxed resize-y transition-colors"
+          ></textarea>
+
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400 pt-1">
+            <div class="flex items-center gap-4">
+              <span>WORDS: <strong id="word-count-badge" class="text-cyanNeon">0</strong></span>
+              <span>EST. READING: <strong id="reading-time-badge" class="text-white">0 min</strong></span>
+            </div>
+            <button onclick="clearStudioInputs()" class="text-slate-500 hover:text-roseNeon flex items-center gap-1 transition-colors">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              <span>RESET</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mode: URL Link -->
+        <div id="mode-url-container" class="hidden space-y-4 py-3">
+          <div class="space-y-1">
+            <label class="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider block">TARGET ARTICLE URL</label>
+            <p class="text-xs text-slate-400">Article content is scraped with active Server-Side Request Forgery (SSRF) boundary protections.</p>
+          </div>
+          <input
+            id="studio-url-input"
+            type="url"
+            placeholder="https://www.reuters.com/science/article-slug..."
+            class="w-full px-4 py-4 rounded-xl bg-[#070B16] border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyanNeon font-mono transition-colors"
+          />
+          <div class="p-4 rounded-xl bg-[#070B16] border border-white/5 text-xs font-mono text-slate-400 space-y-1">
+            <div class="flex items-center gap-2 text-cyanNeon font-bold">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span>SSRF SECURITY GUARD ACTIVE</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Strictly blocks loopback IPs (127.0.0.1, localhost), private IP ranges (192.168.x.x, 10.x.x.x), and cloud metadata endpoints (169.254.169.254).</p>
+          </div>
+        </div>
+
+        <!-- Mode: Document Upload -->
+        <div id="mode-doc-container" class="hidden space-y-4 py-3">
+          <div class="space-y-1">
+            <label class="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider block">UPLOAD DOCUMENT (TXT, PDF, DOCX)</label>
+            <p class="text-xs text-slate-400">Document parser extracts raw textual paragraphs while stripping unverified formatting.</p>
+          </div>
+          <div class="border-2 border-dashed border-white/15 hover:border-cyanNeon/50 rounded-2xl p-8 text-center transition-colors">
+            <i data-lucide="file-up" class="w-8 h-8 text-cyanNeon mx-auto mb-3"></i>
+            <input
+              id="studio-doc-input"
+              type="file"
+              accept=".txt,.pdf,.docx"
+              class="block w-full text-xs text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-mono file:font-bold file:bg-cyanNeon file:text-black hover:file:bg-cyanNeon/80 cursor-pointer"
+            />
+          </div>
+        </div>
+
+        <!-- Mode: Image Provenance -->
+        <div id="mode-image-container" class="hidden space-y-4 py-3">
+          <div class="space-y-1">
+            <label class="text-xs font-mono font-bold text-slate-300 uppercase tracking-wider block">NEWS IMAGE PROVENANCE & EXIF METADATA</label>
+            <p class="text-xs text-slate-400">Inspect digital cameras, editing signatures (Photoshop, AI generators), and creation timestamps.</p>
+          </div>
+          <div class="border-2 border-dashed border-white/15 hover:border-violetNeon/50 rounded-2xl p-8 text-center transition-colors">
+            <i data-lucide="camera" class="w-8 h-8 text-violetNeon mx-auto mb-3"></i>
+            <input
+              id="studio-image-input"
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp"
+              class="block w-full text-xs text-slate-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-mono file:font-bold file:bg-violetNeon file:text-white hover:file:bg-violetNeon/80 cursor-pointer"
+            />
+          </div>
+          <div id="image-provenance-box" class="hidden p-5 rounded-xl bg-[#070B16] border border-cyanNeon/30 text-xs font-mono space-y-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Progress Stepper (6-Stage Telemetry) -->
+        <div id="studio-stepper" class="hidden p-5 rounded-xl bg-[#070B16] border border-cyanNeon/30 space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span id="stepper-stage-title" class="flex items-center gap-2 text-cyanNeon font-bold">
+              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+              STAGE 1 OF 6: NORMALIZING CONTENT ENCODING...
+            </span>
+            <span id="stepper-pct" class="text-white font-bold">16%</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-[#1E293B] overflow-hidden">
+            <div id="stepper-bar" class="h-full bg-gradient-to-r from-cyanNeon to-violetNeon transition-all duration-300 w-1/6 rounded-full"></div>
+          </div>
+          <div id="stepper-log" class="text-[11px] font-mono text-slate-400 pt-1">
+            INITIALIZING MULTILINGUAL RECURRENT & SUBLINEAR ENCODERS...
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          id="btn-execute-analysis"
+          onclick="executeAnalysis()"
+          class="w-full py-4 rounded-xl bg-gradient-to-r from-cyanNeon via-cyan-400 to-violetNeon text-black font-extrabold text-sm tracking-widest uppercase font-mono shadow-xl shadow-cyanNeon/25 hover:shadow-cyanNeon/40 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 cursor-pointer"
+        >
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+          <span>EXECUTE CREDIBILITY ANALYSIS</span>
+        </button>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PAGE 4: CREDIBILITY REPORT DOSSIER (THE TRUTH ARCHIVE INTELLIGENCE FILE) -->
+    <!-- ========================================================================= -->
+    <section id="page-report" class="tab-page hidden max-w-6xl mx-auto space-y-8">
+      
+      <!-- Action Navigation Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-white/10 no-print">
+        <button onclick="switchTab('history')" class="flex items-center gap-2 text-xs font-mono text-slate-400 hover:text-cyanNeon transition-colors">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>RETURN TO ARCHIVE</span>
+        </button>
+        <div class="flex items-center gap-3">
+          <button onclick="window.print()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0B1120] hover:bg-[#10192E] border border-white/10 text-xs font-mono text-slate-200 transition-colors">
+            <i data-lucide="printer" class="w-4 h-4 text-cyanNeon"></i>
+            <span>EXPORT DOSSIER (PDF)</span>
+          </button>
+          <button onclick="switchTab('studio')" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-cyanNeon text-black font-bold text-xs font-mono shadow-md">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            <span>NEW INVESTIGATION</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Master Dossier Header Card -->
+      <div class="bento-card p-6 sm:p-8 relative">
+        <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+          
+          <div class="space-y-4 max-w-3xl">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs font-mono">
+              <span id="report-dossier-id" class="px-3 py-1 rounded-full bg-cyanNeon/15 text-cyanNeon border border-cyanNeon/30 font-bold">
+                DOSSIER #0000
+              </span>
+              <span id="report-date" class="text-slate-400">DATE: 2026-11-18</span>
+              <span class="text-slate-600">•</span>
+              <span id="report-lang" class="text-violetNeon">LANG: EN</span>
+              <span class="text-slate-600">•</span>
+              <span class="text-emeraldNeon font-bold">ZERO-HALLUCINATION VERIFIED</span>
+            </div>
+
+            <h1 id="report-title" class="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-snug">
+              News Article Title Loading...
+            </h1>
+
+            <p id="report-source-url" class="text-xs text-cyanNeon font-mono truncate"></p>
+
+            <div id="report-publisher-box" class="hidden inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-[#070B16] border border-white/10 text-xs font-mono text-slate-300">
+              <i data-lucide="award" class="w-4 h-4 text-cyanNeon"></i>
+              <span id="report-publisher-text">Publisher: Reuters | Wire Service (Tier 1)</span>
+            </div>
+          </div>
+
+          <!-- Circular Score Display Gauge -->
+          <div class="flex-shrink-0 flex flex-col items-center justify-center p-6 bg-[#070B16] rounded-2xl border border-white/10 text-center min-w-[220px]">
+            <div class="relative w-32 h-32 flex items-center justify-center mb-2">
+              <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#1E293B" stroke-width="8"></circle>
+                <circle id="gauge-circle" cx="50" cy="50" r="42" fill="none" stroke="#00F0FF" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="60" stroke-linecap="round" class="transition-all duration-1000"></circle>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span id="report-score-number" class="font-display font-black text-3xl text-white">50</span>
+                <span class="text-[9px] font-mono font-bold text-slate-400 uppercase">INDEX / 100</span>
+              </div>
+            </div>
+            
+            <div id="report-prediction-badge" class="px-3.5 py-1 rounded-full text-xs font-mono font-bold border mt-2">
+              Needs Further Verification
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Models & Linguistic Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Multi-Model Consensus Card -->
+        <div class="bento-card p-6 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <h3 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <i data-lucide="cpu" class="w-5 h-5 text-cyanNeon"></i>
+              <span>Multi-Model Consensus Breakdown</span>
+            </h3>
+            <span id="report-model-agreement" class="text-xs font-mono font-bold text-emeraldNeon">100% Consensus</span>
+          </div>
+          <div id="report-models-list" class="space-y-3 font-mono text-xs">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+        <!-- Linguistic Warnings & Heuristics -->
+        <div class="bento-card p-6 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <h3 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <i data-lucide="alert-triangle" class="w-5 h-5 text-roseNeon"></i>
+              <span>Linguistic Warnings & Clickbait Radar</span>
+            </h3>
+            <span id="report-linguistic-risk" class="text-xs font-mono font-bold text-slate-300">Risk: 0/100</span>
+          </div>
+          <div id="report-warnings-list" class="space-y-3 text-xs">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Explainable AI (XAI) Attribution Map -->
+      <div class="bento-card p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+          <div>
+            <h3 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <i data-lucide="eye" class="w-5 h-5 text-violetNeon"></i>
+              <span>Explainable AI (XAI) Linear Attribution Map</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Word-level feature attribution showing tokens that elevate credibility vs. tokens that trigger sensationalism penalties.</p>
+          </div>
+          <span class="text-xs font-mono text-cyanNeon px-2.5 py-1 rounded bg-cyanNeon/10 border border-cyanNeon/20">
+            LINEAR SALIENCY
+          </span>
+        </div>
+        
+        <div class="flex items-center gap-4 text-xs font-mono pb-2">
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-emeraldNeon"></span>Credibility Booster</span>
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-roseNeon"></span>Sensationalism Penalty</span>
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-slate-600"></span>Neutral</span>
+        </div>
+
+        <div id="report-xai-tokens" class="p-5 rounded-2xl bg-[#070B16] border border-white/5 text-xs sm:text-sm leading-relaxed max-h-64 overflow-y-auto font-sans">
+          <!-- Dynamically highlighted words -->
+        </div>
+      </div>
+
+      <!-- Factual Claims & Primary Evidence Citations -->
+      <div class="bento-card p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+          <div>
+            <h3 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <i data-lucide="check-check" class="w-5 h-5 text-emeraldNeon"></i>
+              <span>Factual Claims & Authenticated Primary Citations</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Claims cross-referenced exclusively against certified primary repositories (NASA, WHO, Reuters, PIB, Nature).</p>
+          </div>
+          <span id="report-claims-count" class="text-xs font-mono font-bold text-cyanNeon">0 Claims Verified</span>
+        </div>
+        <div id="report-claims-list" class="space-y-3 font-mono text-xs">
+          <!-- Dynamically populated claims -->
+        </div>
+      </div>
+
+      <!-- AI Style & Human Review Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- AI Style Diagnostics -->
+        <div class="bento-card p-6 space-y-3">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <h3 class="font-display font-bold text-base text-white flex items-center gap-2">
+              <i data-lucide="bot" class="w-5 h-5 text-violetNeon"></i>
+              <span>AI Writing Style Assessment</span>
+            </h3>
+            <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-violetNeon/15 text-violetNeon border border-violetNeon/30">
+              EXPERIMENTAL
+            </span>
+          </div>
+          <div id="report-ai-style-box" class="space-y-2 font-mono text-xs">
+            <!-- Dynamically populated -->
+          </div>
+          <p class="text-[11px] text-slate-400 italic pt-2 border-t border-white/5">
+            * Ethical Mandate: AI authorship does not establish falsity. Professional newsrooms regularly employ AI assistance for transcription and structural editing.
+          </p>
+        </div>
+
+        <!-- Human Review Workflow -->
+        <div class="bento-card p-6 space-y-3 no-print">
+          <h3 class="font-display font-bold text-base text-white flex items-center gap-2 pb-3 border-b border-white/10">
+            <i data-lucide="user-check" class="w-5 h-5 text-cyanNeon"></i>
+            <span>Human-in-the-Loop Editorial Audit Log</span>
+          </h3>
+          <div id="report-review-confirmed" class="hidden p-3 rounded-xl bg-emeraldNeon/10 border border-emeraldNeon/30 text-emeraldNeon font-mono text-xs">
+            Editorial determination recorded in permanent SQLite audit trail.
+          </div>
+          <div id="report-review-form" class="space-y-3 font-mono text-xs">
+            <div>
+              <label class="text-slate-400 block mb-1">EDITORIAL DETERMINATION</label>
+              <select id="review-status-select" class="w-full px-3 py-2 rounded-xl bg-[#070B16] border border-white/10 text-white">
+                <option value="Verified Authentic">Verified Authentic</option>
+                <option value="Confirmed Misleading">Confirmed Misleading</option>
+                <option value="Inconclusive Evidence">Inconclusive Evidence</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-slate-400 block mb-1">AUDIT EVIDENCE NOTES</label>
+              <input id="review-notes-input" type="text" placeholder="Corroborated with primary research paper DOI..." class="w-full px-3 py-2 rounded-xl bg-[#070B16] border border-white/10 text-white font-sans" />
+            </div>
+            <button onclick="submitEditorialReview()" class="w-full py-2.5 rounded-xl bg-cyanNeon text-black font-bold text-xs tracking-wider uppercase font-mono shadow-md hover:bg-cyan-300 transition-colors">
+              RECORD EDITORIAL DETERMINATION
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PAGE 5: AUDIT & ARTICLE ARCHIVE (SEARCHABLE HISTORICAL DOSSIERS)           -->
+    <!-- ========================================================================= -->
+    <section id="page-history" class="tab-page hidden space-y-6">
+      
+      <!-- History Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div>
+          <span class="text-xs font-mono font-bold text-cyanNeon uppercase tracking-wider">[PERSISTED INTELLIGENCE]</span>
+          <h1 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">AUDIT & ARTICLE ARCHIVE</h1>
+          <p class="text-xs text-slate-400 mt-1">Search, inspect, and filter historical credibility assessments and editorial verdicts.</p>
+        </div>
+        <button onclick="switchTab('studio')" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-cyanNeon text-black font-bold text-xs font-mono shadow-md">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>NEW ARTICLE</span>
+        </button>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="bento-card p-4 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs">
+        <div class="relative w-full sm:w-96">
+          <i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input
+            id="history-search-input"
+            type="text"
+            placeholder="Search archive by headline, keyword..."
+            oninput="filterHistory()"
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#070B16] border border-white/10 text-white focus:outline-none focus:border-cyanNeon font-sans transition-colors"
+          />
+        </div>
+
+        <select id="history-filter-select" onchange="filterHistory()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[#070B16] border border-white/10 text-slate-200">
+          <option value="">ALL CLASSIFICATIONS</option>
+          <option value="Likely Genuine">Likely Genuine</option>
+          <option value="Potentially Misleading">Potentially Misleading</option>
+          <option value="Needs Further Verification">Needs Verification</option>
+        </select>
+      </div>
+
+      <!-- History Items Container -->
+      <p id="history-error" class="hidden text-xs font-mono text-roseNeon"></p>
+      <div id="history-items-container" class="space-y-3 font-mono">
+        <!-- Dynamically populated via JS -->
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PAGE 6: MODEL BENCHMARK STUDIO (EVALUATION METRICS & MATRIX)             -->
+    <!-- ========================================================================= -->
+    <section id="page-models" class="tab-page hidden space-y-8">
+      
+      <!-- Studio Header -->
+      <div class="pb-6 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono font-bold text-cyanNeon uppercase tracking-wider">[RESEARCH BENCHMARKS]</span>
+          <h1 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">MACHINE LEARNING PERFORMANCE STUDIO</h1>
+          <p class="text-xs text-slate-400 mt-1">Rigorous test-set benchmarks computed on held-out evaluation splits across all 5 models.</p>
+        </div>
+        <span class="text-xs px-3.5 py-1.5 rounded-full bg-violetNeon/15 border border-violetNeon/30 text-violetNeon font-mono">
+          TEST SET: HELD-OUT 20% SPLIT
+        </span>
+      </div>
+
+      <!-- Model Cards Grid -->
+      <div id="model-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 font-mono">
+        <!-- Populated via JS -->
+      </div>
+
+      <!-- Charts & Confusion Matrix Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Confusion Matrix Heatmap -->
+        <div class="bento-card p-6 space-y-4">
+          <div>
+            <h3 class="font-display font-bold text-base text-white">Test Confusion Matrix</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Diagonal cells indicate ground-truth hits on held-out test data.</p>
+          </div>
+          <div id="confusion-matrix-box" class="space-y-2 text-xs font-mono">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- F1 & Accuracy Bar Chart -->
+        <div class="bento-card p-6 lg:col-span-2 flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-display font-bold text-base text-white">Cross-Model Evaluation Comparison</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Macro F1 Score vs. Overall Accuracy across classical and neural architectures.</p>
+            </div>
+            <span class="text-xs font-mono text-cyanNeon">MACRO F1 BENCHMARK</span>
+          </div>
+          <div class="w-full h-64">
+            <canvas id="chart-models-bar"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- PAGE 7: WHITEPAPER & METHODOLOGY                                          -->
+    <!-- ========================================================================= -->
+    <section id="page-about" class="tab-page hidden max-w-4xl mx-auto space-y-8">
+      
+      <div class="text-center max-w-xl mx-auto space-y-2">
+        <span class="text-xs font-mono font-bold text-cyanNeon uppercase tracking-wider">[RESEARCH ARCHITECTURE]</span>
+        <h1 class="font-display font-black text-3xl sm:text-4xl text-white">TRUTHLENS AI WHITEPAPER</h1>
+        <p class="text-xs sm:text-sm text-slate-400">Technical formulation, multilingual NLP design, and ethical credibility protocols.</p>
+      </div>
+
+      <div class="bento-card p-6 sm:p-8 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+        <h2 class="font-display font-bold text-base text-white flex items-center gap-2">
+          <i data-lucide="scale" class="w-5 h-5 text-cyanNeon"></i>
+          <span>1. Three-Tier Credibility Formulation vs. Binary Absolutism</span>
+        </h2>
+        <p>
+          TruthLens AI fundamentally rejects binary "True/False" categorization. Binary classification in natural language introduces dangerous false certainty and fails on nuanced reporting, early-breaking stories, and scientific preprints. TruthLens AI computes a continuous 0–100 credibility index mapped into:
+        </p>
+        <ul class="list-disc pl-5 space-y-1 font-mono text-xs text-slate-400">
+          <li><strong class="text-emeraldNeon">Likely Genuine (Score 70–100):</strong> High empirical grounding, formal tone, verified primary citations.</li>
+          <li><strong class="text-roseNeon">Potentially Misleading (Score 40–69):</strong> High sensationalism, emotional panic markers, or uncorroborated assertions.</li>
+          <li><strong class="text-amberNeon">Needs Further Verification (Score &lt; 40 or Disagreement &gt; 50%):</strong> Novel claims or sharp model divergence.</li>
+        </ul>
+      </div>
+
+      <div class="bento-card p-6 sm:p-8 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+        <h2 class="font-display font-bold text-base text-white flex items-center gap-2">
+          <i data-lucide="languages" class="w-5 h-5 text-violetNeon"></i>
+          <span>2. Multilingual Negation Preservation & NFKC Normalization</span>
+        </h2>
+        <p>
+          Standard NLP stopword removal indiscriminately strips negation tokens (<code class="text-cyanNeon">not</code>, <code class="text-cyanNeon">never</code>, <code class="text-cyanNeon">no</code>, <code class="text-cyanNeon">without</code>, Hindi: <code class="text-cyanNeon">नहीं</code>, <code class="text-cyanNeon">मत</code>), inverting the factual meaning of scientific statements ("Medication did <em>not</em> trigger adverse reactions"). TruthLens AI explicitly shields negation tokens throughout tokenization and lemmatization.
+        </p>
+      </div>
+
+      <div class="bento-card p-6 sm:p-8 space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+        <h2 class="font-display font-bold text-base text-white flex items-center gap-2">
+          <i data-lucide="shield-alert" class="w-5 h-5 text-emeraldNeon"></i>
+          <span>3. Zero-Hallucination Protocol & Primary Repository Matching</span>
+        </h2>
+        <p>
+          Unlike large language models that generate synthetic citations and fabricate non-existent URLs, TruthLens AI extracts candidate assertions and executes exact and semantic distance queries exclusively against an authenticated index of certified repositories (NASA, WHO, Reuters, PIB, Nature). The platform never synthesizes citations.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= MASTER FOOTER ================= -->
+  <footer class="border-t border-white/10 py-8 text-center text-xs text-slate-500 relative z-10 no-print font-mono">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <i data-lucide="shield-check" class="w-4 h-4 text-cyanNeon"></i>
+        <span class="font-bold text-slate-300">TRUTHLENS AI</span>
+        <span>— "See Beyond Headlines. Discover What's True."</span>
+      </div>
+      <div>FLASK 3.1 • SCIKIT-LEARN • BILSTM • XAI ENGINE • ZERO-HALLUCINATION EVIDENCE</div>
+    </div>
+  </footer>
+
+  <div id="auth-modal" class="hidden fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm items-center justify-center p-4 no-print">
+    <div class="w-full max-w-md bento-card p-6 space-y-4 font-mono">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-[10px] tracking-widest text-cyanNeon">ARCHIVE CREDENTIALS</p>
+          <h2 id="auth-modal-title" class="font-display font-black text-xl text-white">Sign in</h2>
+        </div>
+        <button onclick="closeAuthModal()" class="text-slate-400 hover:text-white text-xs">CLOSE</button>
+      </div>
+      <p class="text-[11px] text-slate-400">Analysts who sign in have reviews attributed to their dossier. Analysis remains available without an account.</p>
+      <form id="auth-form" onsubmit="submitAuth(event)" class="space-y-3">
+        <input id="auth-name" type="text" placeholder="Name" class="hidden w-full px-3 py-2.5 rounded-xl bg-[#070B16] border border-white/10 text-sm text-white" />
+        <input id="auth-email" type="email" required placeholder="Email" class="w-full px-3 py-2.5 rounded-xl bg-[#070B16] border border-white/10 text-sm text-white" />
+        <input id="auth-password" type="password" required minlength="6" placeholder="Password" class="w-full px-3 py-2.5 rounded-xl bg-[#070B16] border border-white/10 text-sm text-white" />
+        <p id="auth-error" class="hidden text-xs text-roseNeon"></p>
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-cyanNeon text-black font-bold text-xs tracking-wider">CONTINUE</button>
+      </form>
+      <button type="button" onclick="toggleAuthMode()" class="text-[11px] text-slate-400 hover:text-cyanNeon">
+        <span id="auth-switch-label">Need an account? Register</span>
+      </button>
+      <button id="auth-logout-btn" type="button" onclick="logoutAnalyst()" class="hidden text-[11px] text-roseNeon">Sign out of this station</button>
+    </div>
+  </div>
+
+  <!-- ================= MASTER APPLICATION SCRIPT ================= -->
+  <script>
+    // State Variables
+    let currentAnalysisReport = null;
+    let allHistoryItems = [];
+    let credibilityPieChart = null;
+    let trendsAreaChart = null;
+    let modelsBarChart = null;
+    let isAudioEnabled = true;
+    let audioCtx = null;
+    let authMode = 'login';
+
+    const ROUTE_FOR_TAB = {
+      landing: '/',
+      dashboard: '/dashboard',
+      studio: '/studio',
+      history: '/history',
+      models: '/models',
+      about: '/about'
+    };
+
+    function tabFromPath(path) {
+      const reportMatch = path.match(/^\/report\/(\d+)\/?$/);
+      if (reportMatch) return { tab: 'report', id: reportMatch[1] };
+      const map = {
+        '/': 'landing',
+        '/dashboard': 'dashboard',
+        '/studio': 'studio',
+        '/history': 'history',
+        '/models': 'models',
+        '/about': 'about'
+      };
+      return { tab: map[path] || 'landing', id: null };
+    }
+
+    async function apiFetch(url, options = {}) {
+      const opts = Object.assign({}, options);
+      const headers = Object.assign({}, opts.headers || {});
+      const token = localStorage.getItem('truthlens_token');
+      if (token && !headers.Authorization) {
+        headers.Authorization = 'Bearer ' + token;
+      }
+      opts.headers = headers;
+      return fetch(url, opts);
+    }
+
+    function toggleMobileNav(force) {
+      const panel = document.getElementById('mobile-nav');
+      if (!panel) return;
+      const open = typeof force === 'boolean' ? force : panel.classList.contains('hidden');
+      panel.classList.toggle('hidden', !open);
+    }
+
+    function renderAuthState(user) {
+      const label = document.getElementById('auth-label');
+      const logout = document.getElementById('auth-logout-btn');
+      if (!label) return;
+      if (user) {
+        label.textContent = user.name || 'ANALYST';
+        if (logout) logout.classList.remove('hidden');
+      } else {
+        label.textContent = 'SIGN IN';
+        if (logout) logout.classList.add('hidden');
+      }
+    }
+
+    function openAuthModal() {
+      const modal = document.getElementById('auth-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.getElementById('auth-error').classList.add('hidden');
+    }
+
+    function closeAuthModal() {
+      const modal = document.getElementById('auth-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function toggleAuthMode() {
+      authMode = authMode === 'login' ? 'register' : 'login';
+      const nameInput = document.getElementById('auth-name');
+      document.getElementById('auth-modal-title').textContent = authMode === 'login' ? 'Sign in' : 'Register analyst';
+      document.getElementById('auth-switch-label').textContent = authMode === 'login' ? 'Need an account? Register' : 'Already registered? Sign in';
+      nameInput.classList.toggle('hidden', authMode !== 'register');
+      nameInput.required = authMode === 'register';
+    }
+
+    async function submitAuth(event) {
+      event.preventDefault();
+      const errorEl = document.getElementById('auth-error');
+      errorEl.classList.add('hidden');
+      const payload = {
+        email: document.getElementById('auth-email').value.trim(),
+        password: document.getElementById('auth-password').value
+      };
+      if (authMode === 'register') payload.name = document.getElementById('auth-name').value.trim();
+      try {
+        const r = await apiFetch(authMode === 'register' ? '/api/auth/register' : '/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Authentication failed');
+        localStorage.setItem('truthlens_token', data.access_token);
+        renderAuthState(data.user);
+        closeAuthModal();
+      } catch (err) {
+        errorEl.textContent = err.message;
+        errorEl.classList.remove('hidden');
+      }
+    }
+
+    function logoutAnalyst() {
+      localStorage.removeItem('truthlens_token');
+      renderAuthState(null);
+      closeAuthModal();
+    }
+
+    async function restoreSession() {
+      const token = localStorage.getItem('truthlens_token');
+      if (!token) return;
+      try {
+        const r = await apiFetch('/api/auth/me');
+        const data = await r.json();
+        if (data.authenticated && data.user) renderAuthState(data.user);
+        else renderAuthState(null);
+      } catch (err) {
+        renderAuthState(null);
+      }
+    }
+
+    function renderLiveWire(items) {
+      const track = document.getElementById('live-wire-track');
+      if (!track || !items || !items.length) return;
+      const tone = {
+        '[VERIFIED]': 'text-emeraldNeon',
+        '[DECEPTIVE]': 'text-roseNeon',
+        '[UNDER REVIEW]': 'text-amberNeon'
+      };
+      track.innerHTML = items.map((item) => `
+        <span class="flex items-center gap-2">
+          <span class="${tone[item.tag] || 'text-cyanNeon'}">${item.tag}</span>
+          <span>${item.headline}${item.score != null ? ' [' + Math.round(item.score) + '/100]' : ''}</span>
+        </span>
+        <span class="text-slate-600">•</span>
+      `).join('') + `
+        <span class="flex items-center gap-2">
+          <span class="text-cyanNeon">[PRIMARY INDEX]</span>
+          <span>ZERO-HALLUCINATION PROTOCOL ACTIVE // TRAINED ENSEMBLE ONLY</span>
+        </span>
+      `;
+    }
+
+    async function refreshLiveWire() {
+      try {
+        const r = await apiFetch('/api/dashboard/stats');
+        const d = await r.json();
+        if (r.ok) renderLiveWire(d.live_wire || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Benchmark Pre-loaded Samples
+    const PRESET_SAMPLES = {
+      jwst: {
+        title: "NASA James Webb Space Telescope Discovers Oldest Confirmed Black Hole in Early Universe",
+        text: "Astronomers using NASA's James Webb Space Telescope have discovered the most distant active supermassive black hole found to date. The galaxy, CEERS 1019, existed just over 570 million years after the Big Bang, and its black hole is less massive than any other yet identified in the early universe. Researchers published their peer-reviewed findings in The Astrophysical Journal. The team noted that the spectroscopic data gathered by Webb's NIRSpec instrument provided unequivocal evidence of ionized gas accretion around the galactic nucleus."
+      },
+      '5g': {
+        title: "SHOCKING SECRET: 5G Cell Towers Are Transmitting Mind-Control Frequencies to Alter Human DNA!",
+        text: "BOMBSHELL REVELATION!! Whistleblowers have finally leaked classified military documents PROVING that 5G cellular antennas are secretly vibrating at quantum bio-resonance frequencies designed to reprogram human genetic codes! Mainstream doctors and the lying media are covering this up! Drink raw alkaline miracle water with boiled lemon peels immediately to shield your pineal gland from total electromagnetic mind enslavement! SHARE BEFORE THEY DELETE THIS TRUTH!!"
+      },
+      hindi_real: {
+        title: "इसरो ने चंद्रयान-3 के डेटा से चंद्रमा के दक्षिणी ध्रुव पर सल्फर की पुष्टि की",
+        text: "भारतीय अंतरिक्ष अनुसंधान संगठन (ISRO) ने पुष्टि की है कि प्रज्ञान रोवर पर लगे लेजर-इंड्यूस्ड ब्रेकडाउन स्पेक्ट्रोस्कोप (LIBS) उपकरण ने चंद्रमा के दक्षिणी ध्रुव के पास सतह में सल्फर की स्पष्ट उपस्थिति दर्ज की है। वैज्ञानिक विश्लेषण से पुष्टि हुई है कि एल्युमिनियम, कैल्शियम, आयरन, क्रोमियम और टाइटेनियम भी मौजूद हैं। यह शोध नेचर एस्ट्रोनॉमी पत्रिका में प्रकाशित हुआ है।"
+      }
+    };
+
+    // Synthesized Web Audio API Sound System
+    function initAudio() {
+      if (!audioCtx) {
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+          console.warn('Web Audio not supported');
+        }
+      }
+    }
+
+    function playBeep(freq = 800, duration = 0.05, type = 'sine') {
+      if (!isAudioEnabled || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playChord() {
+      if (!isAudioEnabled || !audioCtx) return;
+      [523.25, 659.25, 783.99].forEach((freq, idx) => {
+        setTimeout(() => playBeep(freq, 0.25, 'triangle'), idx * 50);
+      });
+    }
+
+    function toggleAudio() {
+      initAudio();
+      isAudioEnabled = !isAudioEnabled;
+      const label = document.getElementById('audio-label');
+      const icon = document.getElementById('audio-icon');
+      if (isAudioEnabled) {
+        label.textContent = 'AUDIO: ACTIVE';
+        icon.setAttribute('data-lucide', 'volume-2');
+        playBeep(900, 0.08);
+      } else {
+        label.textContent = 'AUDIO: MUTED';
+        icon.setAttribute('data-lucide', 'volume-x');
+      }
+      lucide.createIcons();
+    }
+
+    // Dynamic Cursor Spotlight on Bento Cards
+    document.addEventListener('mousemove', (e) => {
+      document.querySelectorAll('.bento-card').forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Particle Constellation Canvas
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouseX = -1000;
+    let mouseY = -1000;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.radius = Math.random() * 1.5 + 0.8;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.35)';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 48; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.12 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Clock in HUD
+    function updateHUDClock() {
+      const now = new Date();
+      const clockEl = document.getElementById('hud-clock');
+      if (clockEl) {
+        clockEl.textContent = now.toUTCString().slice(17, 25) + ' UTC';
+      }
+    }
+    setInterval(updateHUDClock, 1000);
+    updateHUDClock();
+
+    // Tab Navigation
+    function switchTab(tabId, opts = {}) {
+      if (!opts.silent) {
+        initAudio();
+        playBeep(700, 0.04);
+      }
+      document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-cyanNeon/10', 'text-cyanNeon', 'border', 'border-cyanNeon/20', 'font-semibold');
+        btn.classList.add('text-slate-400');
+      });
+
+      const target = document.getElementById('page-' + tabId);
+      if (target) target.classList.remove('hidden');
+
+      const navBtn = document.getElementById('nav-' + tabId);
+      if (navBtn) {
+        navBtn.classList.remove('text-slate-400');
+        navBtn.classList.add('bg-cyanNeon/10', 'text-cyanNeon', 'border', 'border-cyanNeon/20', 'font-semibold');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+
+      if (tabId === 'dashboard') loadDashboardData();
+      if (tabId === 'history') loadHistoryData();
+      if (tabId === 'models') loadModelsData();
+
+      if (!opts.skipHistory) {
+        const next = tabId === 'report' && opts.reportId
+          ? '/report/' + opts.reportId
+          : ROUTE_FOR_TAB[tabId];
+        if (next && window.location.pathname !== next) {
+          history.pushState({ tab: tabId }, '', next);
+        }
+      }
+    }
+
+    // Studio Mode Switching
+    function setStudioMode(m) {
+      initAudio();
+      playBeep(850, 0.03);
+      document.querySelectorAll('.studio-tab-btn').forEach(b => {
+        b.classList.remove('bg-cyanNeon', 'text-black', 'shadow-lg');
+        b.classList.add('text-slate-400');
+      });
+      const activeBtn = document.getElementById('tab-btn-' + m);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-400');
+        activeBtn.classList.add('bg-cyanNeon', 'text-black', 'shadow-lg');
+      }
+
+      document.getElementById('mode-paste-container').classList.add('hidden');
+      document.getElementById('mode-url-container').classList.add('hidden');
+      document.getElementById('mode-doc-container').classList.add('hidden');
+      document.getElementById('mode-image-container').classList.add('hidden');
+
+      if (m === 'paste') document.getElementById('mode-paste-container').classList.remove('hidden');
+      if (m === 'url') document.getElementById('mode-url-container').classList.remove('hidden');
+      if (m === 'document') document.getElementById('mode-doc-container').classList.remove('hidden');
+      if (m === 'image') document.getElementById('mode-image-container').classList.remove('hidden');
+
+      document.getElementById('studio-error').classList.add('hidden');
+    }
+
+    function loadSampleArticle(key) {
+      initAudio();
+      playBeep(950, 0.05);
+      const sample = PRESET_SAMPLES[key];
+      if (sample) {
+        document.getElementById('studio-title').value = sample.title;
+        document.getElementById('studio-content').value = sample.text;
+        updateWordCount();
+        setStudioMode('paste');
+      }
+    }
+
+    function launchPresetAndAnalyze(key) {
+      loadSampleArticle(key);
+      switchTab('studio');
+      setTimeout(() => executeAnalysis(), 250);
+    }
+
+    function clearStudioInputs() {
+      initAudio();
+      playBeep(600, 0.04);
+      document.getElementById('studio-title').value = '';
+      document.getElementById('studio-content').value = '';
+      document.getElementById('studio-url-input').value = '';
+      document.getElementById('studio-doc-input').value = '';
+      document.getElementById('studio-image-input').value = '';
+      updateWordCount();
+      document.getElementById('studio-error').classList.add('hidden');
+    }
+
+    function updateWordCount() {
+      const text = document.getElementById('studio-content').value.trim();
+      const count = text ? text.split(/\s+/).length : 0;
+      document.getElementById('word-count-badge').textContent = count;
+      const readingTime = Math.max(1, Math.ceil(count / 200));
+      document.getElementById('reading-time-badge').textContent = count > 0 ? `${readingTime} min` : '0 min';
+    }
+
+    function toggleAccordion(id) {
+      initAudio();
+      playBeep(750, 0.03);
+      const el = document.getElementById(id);
+      const icon = document.getElementById(id + '-icon');
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+        if (icon) icon.classList.add('rotate-180');
+      } else {
+        el.classList.add('hidden');
+        if (icon) icon.classList.remove('rotate-180');
+      }
+    }
+
+    // Execute Analysis
+    async function executeAnalysis() {
+      initAudio();
+      playBeep(1000, 0.08);
+
+      const errorBox = document.getElementById('studio-error');
+      const errorMsg = document.getElementById('studio-error-msg');
+      const stepper = document.getElementById('studio-stepper');
+      const btn = document.getElementById('btn-execute-analysis');
+      errorBox.classList.add('hidden');
+
+      const isPaste = !document.getElementById('mode-paste-container').classList.contains('hidden');
+      const isUrl = !document.getElementById('mode-url-container').classList.contains('hidden');
+      const isDoc = !document.getElementById('mode-doc-container').classList.contains('hidden');
+      const isImage = !document.getElementById('mode-image-container').classList.contains('hidden');
+
+      stepper.classList.remove('hidden');
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'pointer-events-none');
+
+      const stages = [
+        "Normalizing textual content and Devanagari NFKC encoding...",
+        "Executing multilingual tokenization & negation shielding...",
+        "Computing sublinear TF-IDF & recurrent sequence embeddings...",
+        "Running multi-model ensemble (LR, NB, SVM, RF, BiLSTM)...",
+        "Cross-referencing verified primary evidence indexes...",
+        "Synthesizing explainable credibility dossier..."
+      ];
+
+      let stageIdx = 0;
+      const interval = setInterval(() => {
+        if (stageIdx < stages.length - 1) {
+          stageIdx++;
+          playBeep(650 + stageIdx * 60, 0.03);
+          document.getElementById('stepper-stage-title').innerHTML = `
+            <i data-lucide="loader-2" class="w-4 h-4 animate-spin text-cyanNeon"></i>
+            STAGE ${stageIdx + 1} OF 6: ${stages[stageIdx]}
+          `;
+          document.getElementById('stepper-pct').textContent = `${Math.round(((stageIdx + 1) / 6) * 100)}%`;
+          document.getElementById('stepper-bar').style.width = `${((stageIdx + 1) / 6) * 100}%`;
+          document.getElementById('stepper-log').textContent = `ACTIVE PROCESS: ${stages[stageIdx]}`;
+          lucide.createIcons();
+        }
+      }, 350);
+
+      try {
+        let resp;
+        if (isPaste) {
+          const text = document.getElementById('studio-content').value.trim();
+          const title = document.getElementById('studio-title').value.trim();
+          if (!text || text.length < 15) throw new Error("Please enter at least 15 characters of news text.");
+
+          const r = await apiFetch('/api/analyze/text', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text, title })
+          });
+          resp = await r.json();
+          if (!r.ok) throw new Error(resp.error || "Analysis failed");
+        } else if (isUrl) {
+          const url = document.getElementById('studio-url-input').value.trim();
+          if (!url) throw new Error("Please enter a valid target article URL.");
+
+          const r = await apiFetch('/api/analyze/url', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url })
+          });
+          resp = await r.json();
+          if (!r.ok) throw new Error(resp.error || "URL extraction failed");
+        } else if (isDoc) {
+          const fileInput = document.getElementById('studio-doc-input');
+          if (!fileInput.files || fileInput.files.length === 0) throw new Error("Please select a TXT, PDF, or DOCX document.");
+
+          const formData = new FormData();
+          formData.append('file', fileInput.files[0]);
+          const r = await apiFetch('/api/analyze/upload', {
+            method: 'POST',
+            body: formData
+          });
+          resp = await r.json();
+          if (!r.ok) throw new Error(resp.error || "Document parsing failed");
+        } else if (isImage) {
+          const imgInput = document.getElementById('studio-image-input');
+          if (!imgInput.files || imgInput.files.length === 0) throw new Error("Please select an image file.");
+
+          const formData = new FormData();
+          formData.append('image', imgInput.files[0]);
+          const r = await apiFetch('/api/analyze/image', {
+            method: 'POST',
+            body: formData
+          });
+          const imgData = await r.json();
+          clearInterval(interval);
+          stepper.classList.add('hidden');
+          btn.disabled = false;
+          btn.classList.remove('opacity-50', 'pointer-events-none');
+
+          const imgBox = document.getElementById('image-provenance-box');
+          imgBox.classList.remove('hidden');
+          imgBox.innerHTML = `
+            <div class="font-bold text-cyanNeon pb-2 border-b border-white/10 flex items-center justify-between">
+              <span>PROVENANCE: ${imgData.provenance_status}</span>
+              <span>${imgData.dimensions || 'Metadata Scanned'}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-slate-300">
+              <div>Camera: <strong>${imgData.camera_make || 'Unknown'} ${imgData.camera_model || ''}</strong></div>
+              <div>Software: <strong>${imgData.software_signature || 'None detected'}</strong></div>
+            </div>
+            <p class="text-violetNeon pt-2 border-t border-white/5">${imgData.educational_disclaimer || ''}</p>
+          `;
+          playChord();
+          return;
+        }
+
+        clearInterval(interval);
+        stepper.classList.add('hidden');
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'pointer-events-none');
+
+        playChord();
+        renderReportDossier(resp);
+        switchTab('report');
+      } catch (err) {
+        clearInterval(interval);
+        stepper.classList.add('hidden');
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'pointer-events-none');
+        playBeep(300, 0.2, 'sawtooth');
+        errorMsg.textContent = err.message;
+        errorBox.classList.remove('hidden');
+      }
+    }
+
+    // Render Dossier
+    function renderReportDossier(data) {
+      currentAnalysisReport = data;
+      document.getElementById('report-dossier-id').textContent = `DOSSIER #${data.analysis_id || data.id || 'LIVE'}`;
+      document.getElementById('report-date').textContent = `DATE: ${data.created_at ? data.created_at.slice(0, 10) : 'CURRENT'}`;
+      document.getElementById('report-lang').textContent = `LANG: ${(data.language || 'EN').toUpperCase()}`;
+      document.getElementById('report-title').textContent = data.article_title || 'Analyzed News Story';
+
+      const sourceEl = document.getElementById('report-source-url');
+      if (data.source_url) {
+        sourceEl.textContent = `SOURCE: ${data.source_url}`;
+        sourceEl.classList.remove('hidden');
+      } else {
+        sourceEl.classList.add('hidden');
+      }
+
+      // Publisher info
+      const pubBox = document.getElementById('report-publisher-box');
+      if (data.publisher_intelligence && data.publisher_intelligence.name) {
+        document.getElementById('report-publisher-text').textContent = `Publisher: ${data.publisher_intelligence.name} (${data.publisher_intelligence.type || 'Wire'}) | Rating: ${data.publisher_intelligence.rating}`;
+        pubBox.classList.remove('hidden');
+      } else {
+        pubBox.classList.add('hidden');
+      }
+
+      // Score and Circular Gauge
+      const score = Math.round(data.credibility_score || 50);
+      document.getElementById('report-score-number').textContent = score;
+
+      const circle = document.getElementById('gauge-circle');
+      const offset = 264 - (264 * score) / 100;
+      circle.style.strokeDashoffset = offset;
+
+      const badge = document.getElementById('report-prediction-badge');
+      badge.textContent = data.predicted_class;
+      if (data.predicted_class === 'Likely Genuine') {
+        circle.setAttribute('stroke', '#00FF9D');
+        badge.className = 'px-3.5 py-1 rounded-full text-xs font-mono font-bold border bg-emeraldNeon/10 text-emeraldNeon border-emeraldNeon/30 mt-2';
+      } else if (data.predicted_class === 'Potentially Misleading') {
+        circle.setAttribute('stroke', '#FF2E54');
+        badge.className = 'px-3.5 py-1 rounded-full text-xs font-mono font-bold border bg-roseNeon/10 text-roseNeon border-roseNeon/30 mt-2';
+      } else {
+        circle.setAttribute('stroke', '#FFB800');
+        badge.className = 'px-3.5 py-1 rounded-full text-xs font-mono font-bold border bg-amberNeon/10 text-amberNeon border-amberNeon/30 mt-2';
+      }
+
+      // Model Consensus List
+      const modelsContainer = document.getElementById('report-models-list');
+      modelsContainer.innerHTML = '';
+      const models = data.model_predictions || {};
+      for (const [mName, mVal] of Object.entries(models)) {
+        const probs = mVal.probabilities || {};
+        const gProb = probs['Likely Genuine'] || 0;
+        const mProb = probs['Potentially Misleading'] || 0;
+        const vProb = probs['Needs Further Verification'] || 0;
+
+        const row = document.createElement('div');
+        row.className = 'p-3 rounded-xl bg-[#070B16] border border-white/5 space-y-1.5';
+        row.innerHTML = `
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-white">${mName}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${
+              mVal.prediction === 'Likely Genuine' ? 'text-emeraldNeon bg-emeraldNeon/10' :
+              mVal.prediction === 'Potentially Misleading' ? 'text-roseNeon bg-roseNeon/10' :
+              'text-amberNeon bg-amberNeon/10'
+            }">${mVal.prediction} (${mVal.confidence || 0}%)</span>
+          </div>
+          <div class="w-full h-1.5 rounded-full bg-[#1E293B] overflow-hidden flex">
+            <div style="width: ${gProb}%" class="bg-emeraldNeon" title="Likely Genuine"></div>
+            <div style="width: ${mProb}%" class="bg-roseNeon" title="Misleading"></div>
+            <div style="width: ${vProb}%" class="bg-amberNeon" title="Needs Verification"></div>
+          </div>
+        `;
+        modelsContainer.appendChild(row);
+      }
+
+      // Linguistic Warnings
+      const lingBox = document.getElementById('report-warnings-list');
+      lingBox.innerHTML = '';
+      const ling = data.linguistic_analysis || {};
+      document.getElementById('report-linguistic-risk').textContent = `Risk Score: ${ling.linguistic_risk_score || 0}/100`;
+
+      if (ling.warning_signals && ling.warning_signals.length > 0) {
+        ling.warning_signals.forEach(sig => {
+          const div = document.createElement('div');
+          div.className = 'p-3 rounded-xl bg-roseNeon/10 border border-roseNeon/20 text-xs font-mono';
+          div.innerHTML = `<strong class="text-roseNeon block mb-0.5">${sig.label}</strong><span class="text-rose-200/80 font-sans">${sig.description}</span>`;
+          lingBox.appendChild(div);
+        });
+      } else {
+        lingBox.innerHTML = `<div class="p-3.5 rounded-xl bg-emeraldNeon/10 border border-emeraldNeon/20 text-xs font-mono text-emeraldNeon flex items-center gap-2"><i data-lucide="check" class="w-4 h-4"></i><span>No elevated sensationalism, clickbait phrasing, or emotional panic signals detected.</span></div>`;
+      }
+
+      // XAI Tokens
+      const xaiBox = document.getElementById('report-xai-tokens');
+      xaiBox.innerHTML = '';
+      const tokens = (data.explanation && data.explanation.token_highlights) || [];
+      if (tokens.length > 0) {
+        tokens.forEach(tok => {
+          const span = document.createElement('span');
+          span.textContent = tok.token + ' ';
+          span.className = 'inline-block mr-1 my-0.5 cursor-help transition-all ';
+          if (tok.category === 'misleading_strong') {
+            span.className += 'bg-roseNeon/25 text-roseNeon border-b-2 border-roseNeon font-bold px-1 rounded';
+            span.title = `Sensationalism flag | Saliency weight: -${Math.abs(tok.weight || 0.8).toFixed(2)}`;
+          } else if (tok.category === 'genuine_strong') {
+            span.className += 'bg-emeraldNeon/25 text-emeraldNeon border-b-2 border-emeraldNeon font-bold px-1 rounded';
+            span.title = `Credibility anchor | Saliency weight: +${Math.abs(tok.weight || 0.8).toFixed(2)}`;
+          } else {
+            span.className += 'text-slate-300';
+          }
+          xaiBox.appendChild(span);
+        });
+      } else {
+        xaiBox.textContent = data.article_content || 'No saliency highlights available.';
+      }
+
+      // Claims
+      const claimsBox = document.getElementById('report-claims-list');
+      claimsBox.innerHTML = '';
+      const claims = data.claims || data.extracted_claims || [];
+      document.getElementById('report-claims-count').textContent = `${claims.length} Claims Identified`;
+
+      if (claims.length === 0) {
+        claimsBox.innerHTML = `<p class="text-xs text-slate-400 italic">No specific declarative or quantitative assertions extracted.</p>`;
+      } else {
+        claims.forEach((c, idx) => {
+          const card = document.createElement('div');
+          card.className = 'p-4 rounded-xl bg-[#070B16] border border-white/5 space-y-2.5 text-xs';
+          
+          let sourcesHtml = '';
+          const sources = c.sources || c.supporting_sources || [];
+          if (sources.length > 0) {
+            sourcesHtml = '<div class="pt-2 border-t border-white/5 flex flex-wrap gap-2 text-[11px]">';
+            sources.forEach(s => {
+              sourcesHtml += `
+                <a href="${s.source_url || s.url || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#0B1120] hover:bg-cyanNeon/10 border border-white/10 text-cyanNeon hover:underline">
+                  <i data-lucide="external-link" class="w-3 h-3"></i>
+                  <span>${s.publisher || 'Verified Source'}: ${s.source_title || s.title || 'Citation'}</span>
+                </a>
+              `;
+            });
+            sourcesHtml += '</div>';
+          }
+
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-cyanNeon">ASSERTION #${idx + 1}</span>
+              <span class="px-2.5 py-0.5 rounded-full font-semibold ${
+                c.verification_status && c.verification_status.includes('Supported') ? 'bg-emeraldNeon/10 text-emeraldNeon border border-emeraldNeon/30' :
+                c.verification_status && c.verification_status.includes('Contradicted') ? 'bg-roseNeon/10 text-roseNeon border border-roseNeon/30' :
+                'bg-amberNeon/10 text-amberNeon border border-amberNeon/30'
+              }">${c.verification_status || 'Under Review'}</span>
+            </div>
+            <p class="text-white font-semibold font-sans text-sm">"${c.claim_text}"</p>
+            <div class="p-3 rounded-lg bg-[#0B1120] text-slate-300 font-sans leading-relaxed">${c.evidence_summary || 'Evidence cross-referencing completed.'}</div>
+            ${sourcesHtml}
+          `;
+          claimsBox.appendChild(card);
+        });
+      }
+
+      // AI Writing Style
+      const aiStyle = data.ai_writing_style || {};
+      document.getElementById('report-ai-style-box').innerHTML = `
+        <div class="p-3.5 rounded-xl bg-[#070B16] border border-white/5 flex items-center justify-between">
+          <span>Stylometric Classification: <strong>${aiStyle.style_classification || 'Standard Human Style'}</strong></span>
+          <span class="font-mono text-cyanNeon font-bold">Index: ${aiStyle.ai_style_score || 18}/100</span>
+        </div>
+      `;
+
+      // Reset review form
+      document.getElementById('report-review-confirmed').classList.add('hidden');
+      document.getElementById('report-review-form').classList.remove('hidden');
+
+      lucide.createIcons();
+    }
+
+    // Submit Review
+    async function submitEditorialReview() {
+      if (!currentAnalysisReport) return;
+      initAudio();
+      playBeep(900, 0.05);
+
+      const id = currentAnalysisReport.analysis_id || currentAnalysisReport.id;
+      const status = document.getElementById('review-status-select').value;
+      const notes = document.getElementById('review-notes-input').value;
+
+      try {
+        await apiFetch('/api/review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ analysis_id: id, status, notes })
+        });
+        document.getElementById('report-review-form').classList.add('hidden');
+        document.getElementById('report-review-confirmed').classList.remove('hidden');
+        playChord();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // Load Dashboard Data
+    async function loadDashboardData() {
+      const errorEl = document.getElementById('dashboard-error');
+      try {
+        const r = await apiFetch('/api/dashboard/stats');
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'Telemetry unavailable');
+        if (errorEl) errorEl.classList.add('hidden');
+
+        const sampleBadge = document.getElementById('dashboard-sample-badge');
+        if (sampleBadge) sampleBadge.classList.toggle('hidden', !d.is_sample_data);
+        const trendNote = document.getElementById('dashboard-trending-note');
+        if (trendNote) {
+          trendNote.textContent = d.is_sample_data
+            ? 'Archive is empty. These clusters are a labeled preview baseline, not live dossiers.'
+            : 'Terms recurring across archived headlines, with the dominant credibility tier.';
+        }
+        renderLiveWire(d.live_wire || []);
+
+        document.getElementById('kpi-total').textContent = d.total_articles_analyzed || 0;
+        document.getElementById('kpi-genuine').textContent = d.likely_genuine_count || 0;
+        document.getElementById('kpi-misleading').textContent = d.potentially_misleading_count || 0;
+        document.getElementById('kpi-verify').textContent = d.needs_verification_count || 0;
+
+        const tot = d.total_articles_analyzed || 1;
+        document.getElementById('kpi-genuine-pct').textContent = `${Math.round((d.likely_genuine_count / tot) * 100)}% high credibility`;
+        document.getElementById('kpi-misleading-pct').textContent = `${Math.round((d.potentially_misleading_count / tot) * 100)}% flagged hoaxes`;
+
+        // Render Pie Chart
+        const pieCtx = document.getElementById('chart-credibility-pie').getContext('2d');
+        if (credibilityPieChart) credibilityPieChart.destroy();
+        credibilityPieChart = new Chart(pieCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Likely Genuine', 'Potentially Misleading', 'Needs Verification'],
+            datasets: [{
+              data: [d.likely_genuine_count, d.potentially_misleading_count, d.needs_verification_count],
+              backgroundColor: ['#00FF9D', '#FF2E54', '#FFB800'],
+              borderWidth: 0,
+              hoverOffset: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            cutout: '72%'
+          }
+        });
+
+        // Render Area Trends
+        const areaCtx = document.getElementById('chart-trends-area').getContext('2d');
+        if (trendsAreaChart) trendsAreaChart.destroy();
+        trendsAreaChart = new Chart(areaCtx, {
+          type: 'line',
+          data: {
+            labels: (d.analysis_trends || []).map(t => t.date),
+            datasets: [{
+              label: 'Articles Analyzed',
+              data: (d.analysis_trends || []).map(t => t.analyses),
+              borderColor: '#00F0FF',
+              backgroundColor: 'rgba(0, 240, 255, 0.12)',
+              fill: true,
+              tension: 0.4,
+              borderWidth: 2,
+              pointBackgroundColor: '#00F0FF',
+              pointRadius: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#64748B', font: { family: 'JetBrains Mono' } } },
+              y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#64748B', font: { family: 'JetBrains Mono' } } }
+            }
+          }
+        });
+
+        // Recent table
+        const tbody = document.getElementById('dashboard-recent-tbody');
+        tbody.innerHTML = '';
+        (d.recent_activity || []).forEach(act => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-white/5 transition-colors' + (d.is_sample_data ? '' : ' cursor-pointer');
+          if (!d.is_sample_data) tr.onclick = () => viewReportById(act.id);
+          const action = d.is_sample_data
+            ? '<span class="text-[10px] text-slate-500">PREVIEW</span>'
+            : `<button class="px-3 py-1 rounded bg-white/5 hover:bg-cyanNeon hover:text-black text-slate-300 text-xs font-bold transition-colors">INSPECT</button>`;
+          tr.innerHTML = `
+            <td class="py-3 font-medium text-white max-w-xs truncate">${act.title}</td>
+            <td class="py-3">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold ${
+                act.predicted_class === 'Likely Genuine' ? 'bg-emeraldNeon/10 text-emeraldNeon' :
+                act.predicted_class === 'Potentially Misleading' ? 'bg-roseNeon/10 text-roseNeon' :
+                'bg-amberNeon/10 text-amberNeon'
+              }">${act.predicted_class}</span>
+            </td>
+            <td class="py-3 font-bold text-white">${Math.round(act.credibility_score)} / 100</td>
+            <td class="py-3 text-right">${action}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        const trendList = document.getElementById('dashboard-trending-list');
+        if (trendList) {
+          const topics = d.trending_topics || [];
+          trendList.innerHTML = topics.length ? topics.map(topic => `
+            <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#070B16] border border-white/5">
+              <div>
+                <span class="text-white font-bold block">${topic.topic}</span>
+                <span class="text-slate-500">${topic.mentions} archived mention${topic.mentions === 1 ? '' : 's'}</span>
+              </div>
+              <div class="text-right">
+                <span class="block text-slate-300">${topic.dominant_sentiment}</span>
+                <span class="${topic.risk === 'High' ? 'text-roseNeon' : topic.risk === 'Medium' ? 'text-amberNeon' : 'text-emeraldNeon'}">${topic.risk} risk</span>
+              </div>
+            </div>
+          `).join('') : '<div class="text-slate-500">No headline clusters yet.</div>';
+        }
+
+      } catch (e) {
+        console.error(e);
+        if (errorEl) {
+          errorEl.textContent = e.message || 'Telemetry sync failed.';
+          errorEl.classList.remove('hidden');
+        }
+      }
+    }
+
+    // View specific report
+    async function viewReportById(id, opts = {}) {
+      if (!opts.silent) {
+        initAudio();
+        playBeep(850, 0.04);
+      }
+      try {
+        const r = await apiFetch(`/api/analysis/${id}`);
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'Dossier not found');
+        renderReportDossier(d);
+        switchTab('report', { reportId: id, skipHistory: !!opts.skipHistory, silent: true });
+      } catch (e) {
+        console.error(e);
+        const errorBox = document.getElementById('studio-error');
+        const errorMsg = document.getElementById('studio-error-msg');
+        if (errorBox && errorMsg) {
+          errorMsg.textContent = e.message || 'Dossier could not be opened.';
+          errorBox.classList.remove('hidden');
+          switchTab('studio', { skipHistory: !!opts.skipHistory, silent: true });
+        }
+      }
+    }
+
+    // Load History
+    async function loadHistoryData() {
+      const errorEl = document.getElementById('history-error');
+      try {
+        const params = new URLSearchParams();
+        const q = (document.getElementById('history-search-input')?.value || '').trim();
+        const cat = document.getElementById('history-filter-select')?.value || '';
+        if (q) params.set('search', q);
+        if (cat) params.set('category', cat);
+        const r = await apiFetch('/api/analysis/history' + (params.toString() ? '?' + params.toString() : ''));
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'Archive query failed');
+        if (errorEl) errorEl.classList.add('hidden');
+        allHistoryItems = d.items || [];
+        renderHistoryList(allHistoryItems);
+      } catch (e) {
+        console.error(e);
+        if (errorEl) {
+          errorEl.textContent = e.message || 'Archive could not be loaded.';
+          errorEl.classList.remove('hidden');
+        }
+      }
+    }
+
+    function renderHistoryList(items) {
+      const container = document.getElementById('history-items-container');
+      container.innerHTML = '';
+
+      if (items.length === 0) {
+        container.innerHTML = `<div class="p-12 text-center text-xs text-slate-400 bento-card">No analysis records in history yet. Analyze your first news story in the Studio!</div>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bento-card p-5 hover:border-cyanNeon/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4';
+        card.innerHTML = `
+          <div class="space-y-1.5 max-w-2xl">
+            <div class="flex items-center gap-2 text-xs">
+              <span class="px-2.5 py-0.5 rounded-full font-bold text-[10px] ${
+                item.predicted_class === 'Likely Genuine' ? 'bg-emeraldNeon/10 text-emeraldNeon border border-emeraldNeon/30' :
+                item.predicted_class === 'Potentially Misleading' ? 'bg-roseNeon/10 text-roseNeon border border-roseNeon/30' :
+                'bg-amberNeon/10 text-amberNeon border border-amberNeon/30'
+              }">${item.predicted_class}</span>
+              <span class="text-slate-600">•</span>
+              <span class="text-slate-400 font-mono text-[11px]">${item.created_at ? item.created_at.slice(0, 10) : ''}</span>
+              <span class="text-slate-600">•</span>
+              <span class="text-violetNeon text-[11px]">LANG: ${(item.language || 'EN').toUpperCase()}</span>
+            </div>
+            <h3 class="text-sm font-bold text-white font-sans">${item.article_title || 'Untitled Article'}</h3>
+            <p class="text-xs text-slate-400 line-clamp-1 font-sans">${item.article_content || ''}</p>
+          </div>
+          <div class="flex items-center gap-5">
+            <div class="text-right">
+              <span class="text-[10px] text-slate-500 block uppercase font-mono">Credibility</span>
+              <span class="text-base font-black text-white font-mono">${Math.round(item.credibility_score)} / 100</span>
+            </div>
+            <button onclick="viewReportById(${item.id})" class="px-4 py-2 rounded-xl bg-cyanNeon/15 hover:bg-cyanNeon text-cyanNeon hover:text-black border border-cyanNeon/30 text-xs font-bold transition-all">
+              INSPECT DOSSIER
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterHistory() {
+      const q = document.getElementById('history-search-input').value.toLowerCase();
+      const cat = document.getElementById('history-filter-select').value;
+
+      const filtered = allHistoryItems.filter(item => {
+        const matchesQ = !q || (item.article_title && item.article_title.toLowerCase().includes(q)) || (item.article_content && item.article_content.toLowerCase().includes(q));
+        const matchesCat = !cat || item.predicted_class === cat;
+        return matchesQ && matchesCat;
+      });
+
+      renderHistoryList(filtered);
+    }
+
+    // Load Model Performance
+    async function loadModelsData() {
+      try {
+        const r = await apiFetch('/api/models/performance');
+        const d = await r.json();
+        const models = d.models || {};
+
+        const grid = document.getElementById('model-cards-grid');
+        grid.innerHTML = '';
+
+        const chartLabels = [];
+        const chartF1 = [];
+        const chartAcc = [];
+
+        let firstModel = null;
+        for (const [name, m] of Object.entries(models)) {
+          if (!firstModel) firstModel = m;
+          chartLabels.push(name.replace('Multinomial ', 'M. ').replace('Bidirectional ', 'Bi-'));
+          chartF1.push(Math.round(m.f1_score * 100));
+          chartAcc.push(Math.round(m.accuracy * 100));
+
+          const card = document.createElement('div');
+          card.className = 'bento-card p-4 space-y-1.5';
+          card.innerHTML = `
+            <span class="text-xs font-bold text-white block truncate">${name}</span>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400">Accuracy:</span>
+              <span class="font-bold text-cyanNeon">${Math.round(m.accuracy * 100)}%</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-400">Macro F1:</span>
+              <span class="font-bold text-emeraldNeon">${(m.f1_score).toFixed(3)}</span>
+            </div>
+            <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-white/5">
+              <span class="text-slate-500">Latency:</span>
+              <span class="text-violetNeon">${m.inference_time_ms} ms</span>
+            </div>
+          `;
+          grid.appendChild(card);
+        }
+
+        // Confusion matrix
+        if (firstModel && firstModel.confusion_matrix) {
+          const cmBox = document.getElementById('confusion-matrix-box');
+          cmBox.innerHTML = `
+            <div class="grid grid-cols-4 gap-2 text-center text-xs font-bold text-slate-400 pb-1 border-b border-white/5">
+              <span>Actual \\ Pred</span><span>Genuine</span><span>Mislead</span><span>Verify</span>
+            </div>
+          `;
+          const labels = ['Genuine', 'Mislead', 'Verify'];
+          firstModel.confusion_matrix.forEach((row, rIdx) => {
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'grid grid-cols-4 gap-2 text-center text-xs items-center';
+            rowDiv.innerHTML = `<span class="text-left font-semibold text-slate-400 pl-1">${labels[rIdx]}</span>` +
+              row.map((val, cIdx) => `<div class="p-2.5 rounded-lg ${rIdx === cIdx ? 'bg-emeraldNeon/20 text-emeraldNeon font-bold border border-emeraldNeon/30' : 'bg-[#070B16] text-slate-400'}">${val}</div>`).join('');
+            cmBox.appendChild(rowDiv);
+          });
+        }
+
+        // Models Comparison Bar Chart
+        const barCtx = document.getElementById('chart-models-bar').getContext('2d');
+        if (modelsBarChart) modelsBarChart.destroy();
+        modelsBarChart = new Chart(barCtx, {
+          type: 'bar',
+          data: {
+            labels: chartLabels,
+            datasets: [
+              { label: 'Macro F1 (%)', data: chartF1, backgroundColor: '#8B5CF6', borderRadius: 6 },
+              { label: 'Accuracy (%)', data: chartAcc, backgroundColor: '#00F0FF', borderRadius: 6 }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#64748B', font: { family: 'JetBrains Mono' } } },
+              y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#64748B', font: { family: 'JetBrains Mono' } }, min: 0, max: 100 }
+            }
+          }
+        });
+
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+{
+  "Logistic Regression": {
+    "model_name": "Logistic Regression",
+    "accuracy": 0.7222,
+    "precision": 0.7937,
+    "recall": 0.6905,
+    "f1_score": 0.7103,
+    "weighted_f1": 0.7176,
+    "roc_auc": 0.9091,
+    "confusion_matrix": [
+      [
+        5,
+        2,
+        0
+      ],
+      [
+        1,
+        6,
+        0
+      ],
+      [
+        1,
+        1,
+        2
+      ]
+    ],
+    "training_time_sec": 0.1496,
+    "inference_time_ms": 0.011,
+    "improved": true,
+    "classes": [
+      "Likely Genuine",
+      "Potentially Misleading",
+      "Needs Further Verification"
+    ]
+  },
+  "Multinomial Naive Bayes": {
+    "model_name": "Multinomial Naive Bayes",
+    "accuracy": 0.7222,
+    "precision": 0.8111,
+    "recall": 0.6905,
+    "f1_score": 0.7139,
+    "weighted_f1": 0.7218,
+    "roc_auc": 0.9048,
+    "confusion_matrix": [
+      [
+        5,
+        2,
+        0
+      ],
+      [
+        1,
+        6,
+        0
+      ],
+      [
+        0,
+        2,
+        2
+      ]
+    ],
+    "training_time_sec": 0.001,
+    "inference_time_ms": 0.018,
+    "improved": true,
+    "classes": [
+      "Likely Genuine",
+      "Potentially Misleading",
+      "Needs Further Verification"
+    ]
+  },
+  "Calibrated Linear SVM": {
+    "model_name": "Calibrated Linear SVM",
+    "accuracy": 0.2222,
+    "precision": 0.0741,
+    "recall": 0.3333,
+    "f1_score": 0.1212,
+    "weighted_f1": 0.0808,
+    "roc_auc": 0.8929,
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        7
+      ],
+      [
+        0,
+        0,
+        7
+      ],
+      [
+        0,
+        0,
+        4
+      ]
+    ],
+    "training_time_sec": 0.4447,
+    "inference_time_ms": 0.019,
+    "improved": true,
+    "classes": [
+      "Likely Genuine",
+      "Potentially Misleading",
+      "Needs Further Verification"
+    ]
+  },
+  "Random Forest": {
+    "model_name": "Random Forest",
+    "accuracy": 0.6111,
+    "precision": 0.4074,
+    "recall": 0.5238,
+    "f1_score": 0.4583,
+    "weighted_f1": 0.5347,
+    "roc_auc": 0.9004,
+    "confusion_matrix": [
+      [
+        5,
+        2,
+        0
+      ],
+      [
+        1,
+        6,
+        0
+      ],
+      [
+        3,
+        1,
+        0
+      ]
+    ],
+    "training_time_sec": 1.3331,
+    "inference_time_ms": 0.719,
+    "improved": true,
+    "classes": [
+      "Likely Genuine",
+      "Potentially Misleading",
+      "Needs Further Verification"
+    ]
+  },
+  "Bidirectional LSTM": {
+    "model_name": "Bidirectional LSTM",
+    "accuracy": 0.3889,
+    "precision": 0.1296,
+    "recall": 0.3333,
+    "f1_score": 0.1867,
+    "weighted_f1": 0.2178,
+    "roc_auc": 0.6732,
+    "confusion_matrix": [
+      [
+        7,
+        0,
+        0
+      ],
+      [
+        7,
+        0,
+        0
+      ],
+      [
+        4,
+        0,
+        0
+      ]
+    ],
+    "training_time_sec": 3.0272,
+    "inference_time_ms": 2.284,
+    "training_history": {
+      "train_loss": [
+        1.0971207264808278,
+        1.096068059547934,
+        1.0946778046129326,
+        1.0921944002432207,
+        1.0911782259364866,
+        1.0906528113089475,
+        1.0892053272534836,
+        1.088066689550036,
+        1.0876722633037033,
+        1.0869313120018482,
+        1.0851122140441818,
+        1.0848883413329877,
+        1.0848721654274582,
+        1.08376621126002,
+        1.0834136091776656
+      ],
+      "val_loss": [
+        1.0838620556352048,
+        1.0815358021879988,
+        1.0798327849188394,
+        1.0791431373111828,
+        1.0788066087705876,
+        1.0767232948293615,
+        1.0755799375854018,
+        1.0755000972533066,
+        1.0736806328048376,
+        1.072895416033225,
+        1.0730706169061093,
+        1.0720184022789878,
+        1.0709343003659582,
+        1.07133662879193,
+        1.0716869886627318
+      ],
+      "train_acc": [
+        0.38,
+        0.34,
+        0.36,
+        0.38,
+        0.36,
+        0.38,
+        0.34,
+        0.34,
+        0.34,
+        0.4,
+        0.44,
+        0.44,
+        0.44,
+        0.48,
+        0.44
+      ],
+      "val_acc": [
+        0.5,
+        0.4444444444444444,
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.3888888888888889,
+        0.3888888888888889,
+        0.3888888888888889,
+        0.3888888888888889,
+        0.3888888888888889,
+        0.3888888888888889,
+        0.3888888888888889,
+        0.3888888888888889,
+        0.3888888888888889
+      ]
+    },
+    "improved": true,
+    "classes": [
+      "Likely Genuine",
+      "Potentially Misleading",
+      "Needs Further Verification"
+    ]
+  }
+}

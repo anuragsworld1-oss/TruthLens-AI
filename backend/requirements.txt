@@ -1,0 +1,40 @@
+# ============================================================
+# TruthLens AI 2.0 - Core Dependencies (required, always installed)
+# ============================================================
+flask>=3.0.0
+flask-cors>=4.0.0
+flask-sqlalchemy>=3.1.0
+flask-jwt-extended>=4.6.0
+flask-limiter>=3.5.0
+python-dotenv>=1.0.0
+scikit-learn>=1.4.0
+nltk>=3.8.0
+numpy>=1.26.0
+pandas>=2.2.0
+joblib>=1.3.0
+beautifulsoup4>=4.12.0
+trafilatura>=1.7.0
+pypdf>=4.0.0
+python-docx>=1.1.0
+pillow>=10.2.0
+requests>=2.31.0
+pytest>=8.0.0
+
+# ============================================================
+# TruthLens AI 2.0 - Optional Dependencies
+# These enable advanced features but are NOT required. The app runs
+# fully without them (graceful degradation). Install separately:
+#
+#   pip install transformers torch          # DistilBERT ensemble vote
+#   pip install sentence-transformers faiss-cpu  # RAG evidence retrieval
+#   pip install lime                        # Per-instance LIME attribution
+#
+# After installing optional deps, build the artifacts:
+#   python ml_pipeline/training/train_transformer.py      # fine-tune DistilBERT
+#   python ml_pipeline/training/build_evidence_index.py   # build FAISS index
+# ============================================================
+# transformers>=4.40.0        # OPTIONAL: DistilBERT transformer model
+# torch>=2.2.0                # OPTIONAL: required by transformers
+# sentence-transformers>=2.7.0  # OPTIONAL: RAG evidence embeddings
+# faiss-cpu>=1.8.0            # OPTIONAL: RAG vector search
+# lime>=0.2.0                 # OPTIONAL: LIME per-instance explanations
