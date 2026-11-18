@@ -38,3 +38,4 @@ pytest>=8.0.0
 # sentence-transformers>=2.7.0  # OPTIONAL: RAG evidence embeddings
 # faiss-cpu>=1.8.0            # OPTIONAL: RAG vector search
 # lime>=0.2.0                 # OPTIONAL: LIME per-instance explanations
+gunicorn>=22.0.0
